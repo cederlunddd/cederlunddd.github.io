@@ -6,21 +6,66 @@
 	<link href='style.css' rel='stylesheet'>
 </head>
 <body>
+	<div id='workView'>
+		<h1></h1>
+	</div>
+
     <header>
+		<div></div>
         <h1 id='title'>cederlund</h1>
+		<nav>
+			<a href='https://github.com/cederlunddd'>github</a>
+			<a href='https://www.linkedin.com/in/cederlundtoni'>linkedin</a>
+		</nav>
     </header>
     <main>
-        <div id='works'>
-			<div class='workContainer'><div class='work'></div></div>
-			<div class='workContainer'><div class='work'></div></div>
-			<div class='workContainer'><div class='work'></div></div>
-			<div class='workContainer'><div class='work'></div></div>
-			<div class='workContainer'><div class='work'></div></div>
-			<div class='workContainer'><div class='work'></div></div>
-			<div class='workContainer'><div class='work'></div></div>
-			<div class='workContainer'><div class='work'></div></div>
-			<div class='workContainer'><div class='work'></div></div>
+        <div class='works'>
+			<div id='test1' class='work' style='background-image:url("img/test.png")' onclick="open_work_view(this.id)">
+				<h2 class='year'>2023</h2>
+				<h2 class='name'>work_name</h2>
+			</div>
+			<div class='work'>2</div>
+			<div class='work'>3</div>
+			<div class='work'>4</div>
+        </div>
+
+		<div class='hrWithText'>
+			<h2 class='sectionTitle'>graveyard</h2>
+		</div>
+
+        <div class='works'>
+			<div class='work'>1</div>
+			<div class='work'>2</div>
+			<div class='work'>3</div>
+			<div class='work'>4</div>
         </div>
     </main>
 </body>
 </html>
+
+<script>
+	let works =
+	{
+		'test1':{
+			'name':'test',
+			'description':'test description',
+			'link':'test description'
+		},
+		'test2':{
+			'name':'test2',
+			'description':'test2 descy',
+			'link':'test description'
+		}
+	}
+
+	function open_work_view(id)
+	{
+		document.getElementById('workView').style.display = 'block'
+		let work = works[id]
+	}
+
+	function close_work_view()
+	{
+		document.getElementById('workView').style.display = 'none'
+	}
+</script>
