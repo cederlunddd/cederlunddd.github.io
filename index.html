@@ -6,8 +6,13 @@
 	<link href='style.css' rel='stylesheet'>
 </head>
 <body>
-	<div id='workView'>
-		<h1></h1>
+	<div id='workViewBackground' onclick='close_work_view()'>
+		<div id='workView' onclick='click_work_view()'>
+			<h1 id='workViewName'>_name_</h1>
+			<h2 id='workViewYear'>_year_</h1>
+			<a id='workViewLink'>_link_</a>
+			<p id='workViewDescription'>_description_</p>
+		</div>
 	</div>
 
     <header>
@@ -19,8 +24,8 @@
 		</nav>
     </header>
     <main>
-        <div class='works'>
-			<div id='test1' class='work' style='background-image:url("img/test.png")' onclick="open_work_view(this.id)">
+        <div id='works' class='works'>
+			<div id='test1' class='work' style='background-image:url("img/test.png")' onclick='open_work_view(this.id)'>
 				<h2 class='year'>2023</h2>
 				<h2 class='name'>work_name</h2>
 			</div>
@@ -44,28 +49,64 @@
 </html>
 
 <script>
-	let works =
-	{
-		'test1':{
-			'name':'test',
-			'description':'test description',
-			'link':'test description'
+	let worksTable = `{
+		"test1":{
+			"name":"test1_name",
+			"description":"test 1 description",
+			"image":"test.png",
+			"year":"2023",
+			"link":"test_link"
 		},
-		'test2':{
-			'name':'test2',
-			'description':'test2 descy',
-			'link':'test description'
+		"test2":{
+			"name":"test2",
+			"description":"test2 descy",
+			"link":"test description"
+		}
+	}`;
+	worksTable = JSON.parse(worksTable)
+	onload = (event) => on_load()
+
+	function on_load()
+	{
+		let works = document.getElementById('works')
+		
+		for (let workEntry in worksTable)
+		{
+			let work = worksTable[workEntry]
+
+			let workDiv = document.createElement('div')
+			workDiv.classList.add('work')
+			workDiv.id = ??
+
+			workDiv.style.backgroundImage = 'url("img/' + work.image + '")'
+			workDiv.onclick = function(){open_work_view(this.id)}
+			
+			let h2 = document.createElement('h2')
+			h2.innerHTML = work.year
+			workDiv.appendChild(h2)
+
+			h2 = document.createElement('h2')
+			h2.innerHTML = work.name
+			workDiv.appendChild(h2)
+
+			works.appendChild(workDiv)
 		}
 	}
 
 	function open_work_view(id)
 	{
-		document.getElementById('workView').style.display = 'block'
-		let work = works[id]
+		document.getElementById('workViewBackground').style.display = 'block'
+		let work = works.id
+		document.getElementById('workViewName').innerHTML = work.name
 	}
 
 	function close_work_view()
 	{
-		document.getElementById('workView').style.display = 'none'
+		document.getElementById('workViewBackground').style.display = 'none'
+	}
+
+	function click_work_view()
+	{
+		event.stopPropagation()
 	}
 </script>
