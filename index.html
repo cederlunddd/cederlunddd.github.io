@@ -11,12 +11,14 @@
 			<h1 id='workViewName'>_name_</h1>
 			<h2 id='workViewYear'>_year_</h1>
 			<a id='workViewLink'>_link_</a>
+			<img id='workViewImage'>
 			<p id='workViewDescription'>_description_</p>
 		</div>
 	</div>
 
     <header>
 		<div></div>
+        <h1 id='title'>WORK IN PROGRESS</h1>
         <h1 id='title'>cederlund</h1>
 		<nav>
 			<a href='https://github.com/cederlunddd'>github</a>
@@ -25,13 +27,6 @@
     </header>
     <main>
         <div id='works' class='works'>
-			<div id='test1' class='work' style='background-image:url("img/test.png")' onclick='open_work_view(this.id)'>
-				<h2 class='year'>2023</h2>
-				<h2 class='name'>work_name</h2>
-			</div>
-			<div class='work'>2</div>
-			<div class='work'>3</div>
-			<div class='work'>4</div>
         </div>
 
 		<div class='hrWithText'>
@@ -76,7 +71,8 @@
 
 			let workDiv = document.createElement('div')
 			workDiv.classList.add('work')
-			workDiv.id = ??
+
+			workDiv.id = workEntry
 
 			workDiv.style.backgroundImage = 'url("img/' + work.image + '")'
 			workDiv.onclick = function(){open_work_view(this.id)}
@@ -95,9 +91,16 @@
 
 	function open_work_view(id)
 	{
-		document.getElementById('workViewBackground').style.display = 'block'
-		let work = works.id
+		let work = worksTable[id]
+
 		document.getElementById('workViewName').innerHTML = work.name
+		document.getElementById('workViewYear').innerHTML = work.year
+		document.getElementById('workViewLink').innerHTML = work.link
+		document.getElementById('workViewLink').href = work.link
+		document.getElementById('workViewDescription').innerHTML = work.description
+		document.getElementById('workViewImage').src = 'img/' + work.image
+
+		document.getElementById('workViewBackground').style.display = 'block'
 	}
 
 	function close_work_view()
