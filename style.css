@@ -146,7 +146,10 @@ main
 }
 #workView
 {
-	#display:none;
+	display:flex;
+	flex-direction:column;
+	box-sizing:border-box;
+	padding:3em;
 	background-color:#fff;
 	position:fixed;
 	width:80vw;
@@ -158,12 +161,32 @@ main
 }
 #workView *
 {
-	margin:2rem;
+	#margin:2rem;
+}
+#workView h1
+{
+	margin:0;
+}
+#workView p
+{
+	margin:0;
+	margin-top:3em;
 }
 
-img
+#workView img
 {
 	float:right;
-	height:max-content;
-	flex-grow:1;
+	#height:max-content;
+	#flex:1;
+	height:100%;
+	box-sizing:border-box;
+}
+
+.descriptionAndMedia
+{
+	display:flex;
+	#flex-direction:column;
+	flex:1;
+	justify-content:space-between;
+	box-sizing:border-box;
 }
