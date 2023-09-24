@@ -5,9 +5,7 @@
 	<title>cederlund</title>
 	<link href='style.css' rel='stylesheet'>
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
-		@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda&display=swap');
-		@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400&display=swap');
+  		@import url('https://fonts.googleapis.com/css2?family=Prata&family=Sanchez&display=swap');
 	</style>
 </head>
 <body>
@@ -26,7 +24,7 @@
 
     <header>
 		<div></div>
-        <h6 id='title' style='display:block'>WORK IN PROGRESS</h6>
+        <h1 id='title' style='display:none'>WORK IN PROGRESS</h1>
         <h1 id='title'>cederlund</h1>
 		<nav>
 			<a href='https://github.com/cederlunddd'>github</a>
@@ -62,7 +60,7 @@
 		},
 		"Timely Fusillades":{
 			"name":"Timely Fusillades",
-			"description":"The first game I managed to complete thanks to the time constraints of a gamejam. The goal of the jam was to create a bullethell game themed around time, so I created a game with evenly timed out attacks, and a unique control mechanism utilising the full keyboard for movement. <br><br>Instead of moving around with directional inputs, you must instead press the key on your keyboard that you want your character to move to. I intentionally didn't include a tutorial, since I wanted players to discover how the movement system works by themselves, and most players did seem to get it rather quickly.",
+			"description":"The first game I managed to complete thanks to the time constraints of a gamejam.",
 			"image":"timely_fusillades.png",
 			"year":"2019",
 			"link":"https://fakedeltatime.itch.io/timely-fusillades"
