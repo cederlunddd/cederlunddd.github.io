@@ -5,9 +5,9 @@
 	<title>cederlund</title>
 	<link href='style.css' rel='stylesheet'>
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
-		@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda&display=swap');
-		@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400&display=swap');
+		@import url( 'https://fonts.googleapis.com/css2?family=Prata&display=swap' );
+		@import url( 'https://fonts.googleapis.com/css2?family=Bodoni+Moda&display=swap' );
+		@import url( 'https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400&display=swap' );
 	</style>
 </head>
 <body>
@@ -78,7 +78,7 @@
 	let worksParsed = JSON.parse( worksJSON );
 	let worksTable = [];
 
-	onload = (event) => on_load();
+	onload = ( event ) => on_load();
 
 	function on_load()
 	{
@@ -89,30 +89,30 @@
 			worksTable.push( worksParsed[ workEntry ] );
 		}
 
-		worksTable.sort(function(a, b)
+		worksTable.sort( function(a, b)
 			{
 				return a.year - b.year;
-			});
+			} );
 
 		worksTable.reverse();
 		
 		for ( const workEntry in worksTable )
 		{
-			let work = worksTable[workEntry];
+			let work = worksTable[ workEntry ];
 
-			let workDiv = document.createElement('div');
-			workDiv.classList.add('work');
+			let workDiv = document.createElement( 'div' );
+			workDiv.classList.add( 'work' );
 
 			workDiv.id = workEntry;
 
 			workDiv.style.backgroundImage = 'url("img/' + work.image + '")';
 			workDiv.onclick = function(){open_work_view(this.id)};
 			
-			let h2 = document.createElement('h2');
+			let h2 = document.createElement( 'h2' );
 			h2.innerHTML = work.year;
 			workDiv.appendChild(h2);
 
-			h2 = document.createElement('h2');
+			h2 = document.createElement( 'h2' );
 			h2.innerHTML = work.name;
 			workDiv.appendChild(h2);
 
@@ -124,19 +124,19 @@
 	{
 		let work = worksTable[id];
 
-		document.getElementById('workViewName').innerHTML = work.name;
-		document.getElementById('workViewYear').innerHTML = work.year;
-		document.getElementById('workViewLink').innerHTML = work.link;
-		document.getElementById('workViewLink').href = work.link;
-		document.getElementById('workViewDescription').innerHTML = work.description;
-		document.getElementById('workViewImage').src = 'img/' + work.image;
+		document.getElementById( 'workViewName' ).innerHTML = work.name;
+		document.getElementById( 'workViewYear' ).innerHTML = work.year;
+		document.getElementById( 'workViewLink' ).innerHTML = work.link;
+		document.getElementById( 'workViewLink' ).href = work.link;
+		document.getElementById( 'workViewDescription' ).innerHTML = work.description;
+		document.getElementById( 'workViewImage' ).src = 'img/' + work.image;
 
-		document.getElementById('workViewBackground').style.display = 'block';
+		document.getElementById( 'workViewBackground' ).style.display = 'block';
 	}
 
 	function close_work_view()
 	{
-		document.getElementById('workViewBackground').style.display = 'none';
+		document.getElementById( 'workViewBackground' ).style.display = 'none';
 	}
 
 	function click_work_view()
