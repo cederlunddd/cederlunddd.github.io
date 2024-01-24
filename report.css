@@ -1,0 +1,21 @@
+main
+{
+	display:flex;
+	flex-direction:column;
+	text-align:center;
+}
+
+
+.codeView
+{
+	text-align:left;
+	background-color:#444;
+	color:#fff;
+	font-family:sans;
+	padding:2em;
+	display:inline-block;
+	height:200px;
+	overflow:hidden;
+	margin-left:auto;
+	margin-right:auto;
+}

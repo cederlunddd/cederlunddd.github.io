@@ -1,0 +1,744 @@
+<html>
+
+<head>
+	<meta charset='UTF-8'>
+	<title>Ergonomic mechanical keyboard</title>
+	<link href='report.css' rel='stylesheet'>
+</head>
+
+<body>
+<main>
+	<h1>Ergonominen <i>columnar stagger</i> näppäimistö</h1>
+	<p>Liirum laarum</p>
+
+	<pre class="codeView"><code>// Fragment number 
+//$fn = $preview ? 0 : 128;
+// Fragment angle
+$fa = 4;
+// Fragment size 
+$fs = $preview ? 1/2 : 1/5;
+
+// Outemu columnar vars:
+switchSpacing = 19.05;
+switchHole = 14;
+switchLegHole = 3.1;
+switchLegHoleDistance = 1;
+switchLegHoleWidth = 0.8;
+switchLatchHole = 5;
+switchLatchHoleDepth = 1;
+plateThickness = 1.5;
+thumbKeyCount = 4;
+
+halfAngle = 15;
+halfOffset = [15, 54, 0];
+halfSwitchOffset = [-switchSpacing-(switchSpacing-switchHole)/2, 
+				-switchSpacing*2-(switchSpacing-switchHole)/2];
+columnOffset = switchSpacing/4;
+thumbOffset = -switchSpacing;
+offsets = [-columnOffset, 0, columnOffset, 0, -columnOffset ];
+
+// Original diameter = 8
+borderDiameter = 13;
+holeDiameter = 3.75;
+
+// Apple macbook 14 vars:
+laptopHeight = 227;
+laptopWidth = 325;
+laptopThickness = 8;
+trackpadHeight = 76;
+trackpadWidth = 105;
+trackpadDepth = 2;
+trackpadOffset = [110, 136];
+keyboardHeight = 114;
+keyboardWidth = 283;
+keyboardDepth = 2;
+keyboardOffset = [0, 17];
+keysHeights = [18.5, 16, 16, 16, 16, 9.5];
+keysPadding = 5;
+keysGap = 2.5;
+
+// Functions
+function add(v) = [for(p=v) 1]*v;
+function cumulativeSum(values) = [ for (a=0, b=values[0]; a < len(values); a = a+1, b = b+(values[a]==undef?0:values[a])) b];
+function flatten(list) = [for (a=list) for (b=a) b ];
+
+// Measuring
+translate( [0, 0, -3] )
+*cube( [240, 200, 1], center=true );
+*cube( [30, 100, 10], center=true );
+
+// Teensy
+translate( [0, (borderDiameter-8)/2, 0] )
+translate( [0, 46.3, -3.1] )
+group()
+{
+	color( "#5a5" )
+	cube( [17.78, 50.8, 1.6], center=true );
+	color( "#ccc" )
+	translate( [0, 50.8/2-9.2/2+0.6, 4/2+1.6/2] )
+	cube( [7.7, 9.2, 4], center=true );
+	color( "#ccc" )
+	translate( [0, -50.8/2+3.2/2+2.85, 1.5/2+1.6/2] )
+	cube( [4.2, 3.2, 1.5], center=true );
+}
+// High quality Teensy
+color( "#5a5" )
+translate( [0, (borderDiameter-8)/2, 0] )
+translate( [0, 48.4, 0.2] )
+*import("../teensy++2.0.stl");
+
+// Bolt
+a = 0.3;
+color( "#bbb" )
+translate(halfOffset)
+rotate(halfAngle)
+//translate( [switchSpacing*4.415-a, -switchSpacing*.651+a, 10] )
+//translate( [switchSpacing*4.415-a, -switchSpacing*.651+a, 10] )
+translate( [0,0,10] )
+for (hole=boltHoles)
+{
+	translate( hole )
+group()
+{
+	cylinder(d=6, h=2.5);
+	*#cylinder(d=8, h=1);
+	mirror( [0, 0, 1] )
+	cylinder(d=2.5, h=20);
+}
+}
+
+// Macbook
+combinedHeightsUnflattened = cumulativeSum(keysHeights);
+combinedHeights = flatten([[0],combinedHeightsUnflattened]);
+translate( [0, 7.5, -6] )
+*group()
+{
+	// Macbook chassis & trackpad
+	color( "#eee" )
+	translate( [0, 0, -laptopThickness] )
+	difference()
+	{
+		difference()
+		{
+			cube( [laptopWidth, laptopHeight, laptopThickness], center=true );
+			translate( [0, trackpadHeight-trackpadOffset.y, laptopThickness/2] )
+			cube( [trackpadWidth, trackpadHeight, trackpadDepth], center=true );
+		}
+		translate( [0, keyboardHeight/2-keyboardOffset.y, laptopThickness/2] )
+		cube( [keyboardWidth, keyboardHeight, keyboardDepth], center=true );
+	}
+	
+	color( "#fff" )
+	translate( [-trackpadWidth/2, -trackpadHeight/2 +trackpadHeight-trackpadOffset.y, -laptopThickness/2-2.5] )
+	cube( [trackpadWidth, trackpadHeight, trackpadDepth] );
+	// Macbook keyboard keys
+	//function add(v, i=0, r=0) =1 < len(v) ? add(v, i + 1, r + v[i]) : r;
+	//for ( height = keysHeights )
+	echo(combinedHeights);
+	color( "#111" )
+	translate( [-keyboardWidth/2 + keysPadding, -keyboardOffset.y + keysPadding] )
+	for ( height = [0:len(keysHeights)-1] )
+	{
+		combined = combinedHeights[height];
+		translate( [0, combined+height*keysGap, -laptopThickness/2-keyboardDepth] )
+		cube( [keyboardWidth-keysPadding*2, keysHeights[height], keyboardDepth] );
+	}
+}
+
+// Switch mockup
+color( "#f00" )
+translate( halfOffset + [0, 0, -5+plateThickness+0.01] )
+rotate(halfAngle)
+translate( [2*switchSpacing, -3*switchSpacing, 0] )
+group()
+{
+	cube( [switchHole, switchHole, 5] );
+
+	mirror( [0,0,1] )
+	translate( [switchHole/2, switchHole/2] )
+	cylinder( h=3 );
+
+	mirror( [0,0,1] )
+	translate( [2.5, 9.5] )
+	cube( [1, 1/3, 3.5] );
+
+	mirror( [0,0,1] )
+	translate( [9, 12] )
+	cube( [1, 1/3, 3.5] );
+
+	translate( [switchHole/2, switchHole/2, 5+9/2+7] )
+	cube( [18, 18, 9], center=true );
+}
+
+// Outemu top cover
+!for (m=[0:1])
+mirror([m,0,0])
+group()
+{
+	translate( [0, 0, plateThickness] )
+	difference()
+	{
+		//*
+		//minkowski()
+		group()
+		{
+			//create_shell_shape( 8.5 );
+			translate( halfOffset )
+			rotate( halfAngle )
+			translate( halfSwitchOffset )
+			linear_extrude( 8.5 )
+			offset(borderDiameter/2)
+			create_shell_polygon();
+
+			*cylinder( d1=borderDiameter, r2=6, h=8.5-0.01 );
+		}
+
+		scale( [1, 1, 8] )
+		create_key_holes( 9 );//*/
+		//create_key_holes( 8.5 );
+		translate( [0, 0, 2.5] )
+		*minkowski()
+		{
+			create_key_holes( 0.01 );
+
+			cylinder( d1=borderDiameter, r2=4, h=8.5-0.01 );
+		}
+
+		create_key_holes( 20 );
+		scale( [1, 1, 30] )
+		create_bolt_holes();
+
+		rotate( halfAngle )
+		translate( [12, 37, 9/2] )
+		minkowski()
+		{
+			group()
+			{
+				cube( [20-4, 51-4, 0.01], center=true );
+				rotate( -halfAngle )
+				translate( [-1, 19.75, 0] )
+				cube( [5.3, 10, 0.1], center=true);
+			}
+
+			cylinder( d1=0, d2=6, h=10-0.01, center=true );
+		}
+
+		mirror([1,0,0])
+		translate( [0, -20, -20] )
+		cube( [100,100,100] );
+	}
+}
+
+// Outemu columnar plate
+group()
+{
+	for (m=[0:1])
+	mirror([m,0,0])
+	mirror( [0, 0, 1] )
+	// Teensy supports
+	*group()
+	{
+		translate( [3, 23.5] )
+		cube( [3, 4, 2.3] );
+
+		translate( [4.2, 65.1] )
+		cube( [2, 3, 2.3] );
+	}
+	difference()
+	{
+		// Plate
+		render()
+		for (m=[0:1])
+		mirror([m,0,0])
+		create_shell_shape( plateThickness );
+
+		// Switch holes
+		group()
+		{
+			create_switch_holes();
+			/*for (m=[0:1])
+			mirror([m,0,0])
+			translate( halfOffset - [0, 0, plateThickness] )
+			rotate(halfAngle)
+			group()
+			{
+				for ( offsetIndex=[0:len(offsets)-1] )
+				{
+					translate( [offsetIndex*switchSpacing, columnOffset+offsets[offsetIndex] ] )
+					for ( i=[0:2] )
+					{
+						translate( [0, -i*switchSpacing] )
+						create_switch_hole();
+					}
+				}
+				translate( [thumbOffset, -3*switchSpacing, 0] )
+				for ( i=[0:thumbKeyCount-1] )
+				{
+					translate( [switchSpacing*i, 0, 0] )
+					create_switch_hole();
+				}
+			}*/
+		}
+
+		// Holes
+		for (m=[0:1])
+		mirror([m,0,0])
+		create_bolt_holes( 3*plateThickness );
+	
+		translate( [0, (borderDiameter-8)/2, 0] )
+		group()
+		{
+		// Mini USB-port cutout
+		translate( [0, 69] )
+		cube( [8, 12, plateThickness*4], center=true );
+
+		// Reset button cutout
+		translate( [0, 22] )
+		group()
+		{
+			cube( [6, 1, plateThickness*4], center=true );
+	
+			for (m=[0:1])
+			mirror([m,0,0])
+			translate( [2, 0, -plateThickness] )
+			cube( [1, 10, plateThickness*4] );
+		}
+		}
+	}
+}
+
+// Outemu columnar base
+//		7 mm is the maximum available space
+height = 8;
+thickness = 2;
+group()
+{
+	// Outemu columnar walls 
+	difference()
+	{
+		for (m=[0:1])
+		mirror([m,0,0])
+		translate( halfOffset )
+		rotate( halfAngle )
+		translate( halfSwitchOffset )
+		mirror( [0, 0, 1] )
+		difference()
+		{
+			difference()
+			{
+				minkowski()
+				{
+				linear_extrude( 0.01 )
+				offset(borderDiameter/2)
+				create_shell_polygon();
+				cylinder(r2=1, r1=0, h=height-0.01);
+				}
+		
+				translate( -halfSwitchOffset )
+				rotate( -halfAngle )
+				translate( -halfOffset )
+				mirror( [1, 0, 0] )
+				translate( [0, -50, -1] )
+				cube( [50, 200, height*2] );
+			}
+		
+			linear_extrude( height*2.1, center=true )
+			offset(borderDiameter/2-2)
+			//offset(-1.5)
+			create_shell_polygon();
+		
+			translate( -halfSwitchOffset ){
+			rotate( -halfAngle ){
+			translate( -halfOffset ){
+			create_bolt_holes( height*2.1 );}}}
+		
+		}
+		translate( [0, (borderDiameter-8)/2, 0] )
+		group()
+		{
+		translate( [0, 70, 0] )
+		{
+			cube( [7, 10, 5], center=true );
+			translate( [0, 0, 1.7] )
+			cube( [8, 10, 5], center=true );
+		}
+		
+		translate( [0, 66.8+0.4, -1.7] )
+		cube( [19, 10, 5], center=true );
+		}
+	}
+
+	for (m=[0:1])
+	mirror([m,0,0])
+	difference()
+	{
+		#minkowski()
+		{
+			translate( [0, 0, -height/2-0.5] )
+			create_bolt_holes( height-1 );
+
+			cylinder(d=2);
+		}
+
+		union()
+		{
+		translate( [0, 0, -height] )
+		create_bolt_holes( height*4 );
+
+		translate( [0, -30+10, 0] )
+		*cube( [10, 15.3, height*8], center=true );
+		}
+	}
+	
+	// Outemu columnar backplate
+	difference()
+	{
+		for (m=[0:1])
+		mirror([m,0,0])
+		translate( halfOffset )
+		rotate( halfAngle )
+		translate( halfSwitchOffset )
+		translate( [0, 0, -height] )
+		mirror([0,0,1])
+		minkowski()
+		{
+			//linear_extrude( 0.1 )
+			linear_extrude( thickness )
+			offset( borderDiameter/2 + 1 )
+			create_shell_polygon();
+			//cylinder( h=thickness-0.1, d1=borderDiameter+1.1, d2=borderDiameter+2.1);
+		}
+	
+		// Outemu columnar feet mockup
+		intersection()
+		{
+			for ( height = [0:len(keysHeights)-1] )
+			{
+				combined = combinedHeights[height];
+				translate( [0, combined+height*keysGap - 4.5, -10+0.4] )
+					render()
+				for (m=[0:1])
+				mirror([m,0,0])
+				mirror( [0, 1, 0] )
+				mirror( [0, 0, 1] )
+				{
+					*cube( [keyboardWidth-keysPadding*2 - height, keysHeights[height], keyboardDepth] );
+					cube( [keyboardWidth/2, keysGap, keyboardDepth] );
+			
+					mirror( [0, 1, 0] )
+					cube( [keyboardWidth/2, 0.4, keyboardDepth] );
+					translate( [0, keysGap, 0] )
+					cube( [keyboardWidth/2, 0.4, keyboardDepth] );
+				}
+			}
+			
+			translate( [0, 0, -10] )
+			linear_extrude( 2, center=true )
+			for (m=[0:1])
+			mirror([m,0,0])
+			offset(-1)
+			translate( halfOffset )
+			rotate(halfAngle)
+			translate( halfSwitchOffset )
+			create_shell_polygon();
+		}
+
+		// Bolt holes
+		for (m=[0:1])
+		mirror([m,0,0])
+		create_bolt_holes( height*3 );//}}}
+
+		// Nut holes
+		for (m=[0:1])
+		mirror([m,0,0])
+		translate( [0, 0, -9-0.8] )
+		create_nut_holes( 2.1 );
+	}
+
+	translate( [0, (borderDiameter-8)/2, 0] )
+	group() // Teensy supports
+	{
+	translate( [0, 46.3, -5.95] )
+	rotate( [0, 0, 45] )
+	cube( [6, 6, 4.1], center=true );
+
+	translate( [0, 26, -5.95] )
+	cube( [5, 3, 4.1], center=true );
+
+	translate( [0, 19.2, -4.95] )
+	cube( [11, 3, 6.1], center=true );
+
+    translate( [0, 71.8, -4] )
+    difference()
+    {
+        cube( [22, 3, 8], center=true );
+
+        for (c=[0:1])
+        scale( [1, 1, 1] + [0, .6, .6]*c )
+        translate( [0, -0.45, -0.1]*c )
+        rotate( [45, 0, 0]*c )
+        translate( [0, 0, 1] )
+        difference()
+        {
+            cube( [19, 3, 2.4], center=true );
+
+            if (c == 1)
+            {
+                rotate( [45, 0, 0])
+                translate( [0, -3/2, 0] )
+                cube( [19, 3, 2.4], center=true );
+            }
+        }
+
+        translate( [0, 0, 2.3] )
+        cube( [8, 10, 5], center=true );
+    }
+	}
+}
+
+// Test columns
+*difference()
+{
+	minkowski()
+	{
+		cube( [switchSpacing*2, switchSpacing*4, plateThickness/2] );
+		// 6mm edge isn't enough
+		cylinder(d=6, h=plateThickness/2);
+	}
+	translate( [(switchSpacing-switchHole)/2, (switchSpacing-switchHole)/2, -plateThickness] )
+	for (x=[0:1])
+		translate( [x*switchSpacing, 0] )
+		for (y=[0:3])
+			translate( [0, y*switchSpacing] )
+			create_switch_hole();
+	cylinder(d=2.5, h=plateThickness*3);
+	translate( [switchSpacing*2, 0] )
+	cylinder(d=3, h=plateThickness*3);
+	translate( [0, switchSpacing*4] )
+	cylinder(d=3.5, h=plateThickness*3);
+	translate( [switchSpacing*2, switchSpacing*4] )
+	cylinder(d=4, h=plateThickness*3);
+	// 3.5-4mm holes work
+}
+
+
+
+module create_switch_hole()
+{
+	difference()
+	{
+		group()
+		{
+			thickness = plateThickness*4;
+			union()
+			{
+				translate( [0, 0, -1] )
+				cube( [switchHole, switchHole, thickness] );
+				translate( [switchSpacing/2 - switchLatchHole, -switchLatchHoleDepth, 0] )
+				//translate( [0, switchSpacing/2 - switchLatchHole, plateThickness] )
+				// Latch hole for the switch to bite into if the case is too thick
+				*group()
+				{
+					cube( [switchLatchHole, switchLatchHoleDepth, plateThickness] );
+					//cube( [switchLatchHoleDepth, switchLatchHole, plateThickness] );
+					translate( [0, switchHole+switchLatchHoleDepth] )
+					cube( [switchLatchHole, switchLatchHoleDepth, plateThickness] );
+					//cube( [switchLatchHoleDepth, switchLatchHole, plateThickness] );
+				}
+			}
+			translate( [-switchLegHoleWidth, switchLegHoleDistance] )
+			cube( [switchHole + 2*switchLegHoleWidth, switchLegHole, thickness] );
+			translate( [-switchLegHoleWidth, switchHole-switchLegHole-switchLegHoleDistance] )
+			cube( [switchHole + 2*switchLegHoleWidth, switchLegHole, thickness] );
+		}
+	}
+}
+
+module create_shell_polygon()
+{
+	polygon( 
+	[
+		[cos(halfAngle)*-switchSpacing,sin(halfAngle)*switchSpacing-switchSpacing],
+		[0,-switchSpacing], // Bottom left
+		[switchSpacing*thumbKeyCount,-switchSpacing],
+		[switchSpacing*thumbKeyCount,0],
+		[switchSpacing*(thumbKeyCount+2),0], // Bottom right
+		[switchSpacing*(thumbKeyCount+2),switchSpacing*3],
+		[switchSpacing*4,switchSpacing*3+columnOffset*2],
+		[switchSpacing*3,switchSpacing*3+columnOffset*2],
+		[switchSpacing,switchSpacing*3],
+		[cos(halfAngle)*-switchSpacing+switchSpacing,sin(halfAngle)*switchSpacing+switchSpacing*3],
+	] );
+}
+
+module create_shell_shape( thickness )
+{
+	difference()
+	{
+		translate( halfOffset )
+		rotate(halfAngle)
+		translate( halfSwitchOffset )
+		linear_extrude( thickness )
+		offset( borderDiameter/2 )
+		create_shell_polygon();
+
+		mirror( [1, 0, 0] )
+		translate( [0, -50, -plateThickness] )
+		cube( [50, 200, plateThickness*8] );
+	}
+}
+
+module create_bolt_holes( cylinderHeight )
+{
+	//cylinderHeight = plateThickness*3;
+	for (hole=boltHoles)
+	{
+        if (hole==boltHoles[len(boltHoles)-1])
+		{
+			translate( hole )
+			cylinder( d=holeDiameter, h=cylinderHeight, center=true );
+		}
+		else
+		{
+			translate( halfOffset )
+			rotate( halfAngle )
+			translate( hole )
+			cylinder( d=holeDiameter, h=cylinderHeight, center=true );
+		}
+	}
+}
+
+module create_nut_holes( cylinderHeight )
+{
+	$fn = 6;
+	nutDiameter = 5.25;
+	nutHexDiameter = nutDiameter/cos(180/$fn);
+	for (hole=boltHoles)
+	{
+        if (hole==boltHoles[len(boltHoles)-1])
+		{
+			translate( hole )
+			union()
+			{
+				cylinder( d=nutHexDiameter, h=cylinderHeight, center=true );
+				translate( [0, 0, 0.4] )
+				cube( [nutHexDiameter/2, nutDiameter, cylinderHeight], center=true );
+			}
+		}
+		else
+		{
+			translate( halfOffset )
+			rotate( halfAngle )
+			translate( hole )
+			union()
+			{
+				cylinder( d=nutHexDiameter, h=cylinderHeight, center=true );
+				translate( [0, 0, 0.4] )
+				cube( [nutHexDiameter/2, nutDiameter, cylinderHeight], center=true );
+			}
+		}
+	}
+}
+
+module create_switch_holes()
+{
+	for (m=[0:1])
+	mirror([m,0,0])
+	translate( halfOffset - [0, 0, plateThickness] )
+	rotate(halfAngle)
+	group()
+	{
+		for ( offsetIndex=[0:len(offsets)-1] )
+		{
+			translate( [offsetIndex*switchSpacing, columnOffset+offsets[offsetIndex] ] )
+			for ( i=[0:2] )
+			{
+				translate( [0, -i*switchSpacing] )
+				create_switch_hole();
+			}
+		}
+		translate( [thumbOffset, -3*switchSpacing, 0] )
+		for ( i=[0:thumbKeyCount-1] )
+		{
+			translate( [switchSpacing*i, 0, 0] )
+			create_switch_hole();
+		}
+	}
+}
+
+module create_key_holes( height )
+{
+	for (m=[0:1])
+	mirror([m,0,0])
+	translate( halfOffset - [0, 0, plateThickness] )
+	rotate(halfAngle)
+	group()
+	{
+		gap = 1;
+		for ( offsetIndex=[0:len(offsets)-1] )
+		{
+			translate( [offsetIndex*switchSpacing, columnOffset+offsets[offsetIndex] ] )
+			for ( i=[0:2] )
+			{
+				translate( [0, -i*switchSpacing] )
+				difference()
+				{
+					group()
+					{
+						union()
+						{
+							translate( [-(switchSpacing-switchHole)/2 - gap/2, -(switchSpacing-switchHole)/2 - gap/2, -1] )
+							cube( [switchSpacing+gap, switchSpacing+gap, height] );
+						}
+					}
+				}
+			}
+		}
+		translate( [thumbOffset, -3*switchSpacing, 0] )
+		for ( i=[0:thumbKeyCount-1] )
+		{
+			translate( [switchSpacing*i, 0, 0] )
+				difference()
+				{
+					group()
+					{
+						union()
+						{
+							translate( [-(switchSpacing-switchHole)/2 - gap/2, -(switchSpacing-switchHole)/2 - gap/2, -1] )
+							//cube( [switchSpacing+0.5, switchSpacing+0.5, height] );
+							cube( [switchSpacing+gap, switchSpacing+gap, height] );
+						}
+					}
+				}
+		}
+	}
+}
+
+//b = 6/borderDiameter;
+//b = 6/10;
+//unit = borderDiameter/2 - b;
+//unit = 6/borderDiameter * borderDiameter/2;
+//unit = borderDiameter/2 - 6/2;
+b = sqrt(pow(borderDiameter/2, 2)/2) - sqrt(pow(6/2, 2)/2);
+unit = (switchSpacing-switchHole)/2 + b;
+boltHoles = [
+	[switchHole+switchSpacing*2 + unit, -switchSpacing*3 - unit],
+	[switchHole+switchSpacing*4 + unit, -switchSpacing*2 - unit],
+	[switchHole+switchSpacing*4 + unit, switchSpacing - (switchSpacing-switchHole) + unit],
+	[switchHole+switchSpacing*2 + unit, switchSpacing - (switchSpacing-switchHole) + unit + 2*columnOffset],
+	[switchHole + (switchSpacing-switchHole) - unit, switchSpacing + unit],
+	[0, -borderDiameter/2 - 8.75 + b]
+];
+
+// Add hex holes to the bottom, there should be extra geometry thanks to the hole cylinders
+// > Done? Tested on ochafiik.com/openscad only
+
+// Try deleting group() actions, seem redundant as per lack of docs
+// > Didn't work! Grouping with {} isn't allowed without an action.
+
+// Also try offset()t
+// > Very pog</code></pre>
+</main>
+</body>
+
+</html>
