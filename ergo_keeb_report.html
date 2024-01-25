@@ -6,12 +6,14 @@
 	<link href='report.css' rel='stylesheet'>
 </head>
 
+
 <body>
 <main>
 	<h1>Ergonominen <br><i>columnar stagger</i> <br>näppäimistö</h1>
 	<p>Liirum laarum</p>
+	<img src="img/keeb/1.jpg" class="scadLayersImage"></img>
 
-	<pre class="codeView"><code>// Fragment number 
+	<pre id="codeView" class="codeView"><code id="code">// Fragment number 
 //$fn = $preview ? 0 : 128;
 // Fragment angle
 $fa = 4;
@@ -738,7 +740,47 @@ boltHoles = [
 
 // Also try offset()t
 // > Very pog</code></pre>
+	<div style="display:none;">
+		<img src="img/keeb/1.jpg"></img>
+		<img src="img/keeb/2.jpg"></img>
+		<img src="img/keeb/3.jpg"></img>
+		<img src="img/keeb/4.jpg"></img>
+	</div>
 </main>
 </body>
 
 </html>
+
+<script>
+	const codeView = document.getElementById( "codeView" );
+
+	let scroll = true;
+
+	const autoScroll = function()
+	{
+		if ( scroll )
+		{
+			let currentScroll = codeView.scrollTop;
+
+			codeView.scrollTop += 1;
+
+			if ( codeView.scrollTop == currentScroll )
+			{
+				codeView.scrollTop = 0;
+			}
+		}
+		setTimeout( autoScroll , 20 );
+	}
+
+	codeView.addEventListener( "mouseover", function( event )
+	{
+		scroll = false;
+	});
+
+	codeView.addEventListener( "mouseout", function( event )
+	{
+		scroll = true;
+	});
+
+	autoScroll();
+</script>
