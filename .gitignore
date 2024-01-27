@@ -1,4 +1,3 @@
-img/keeb/*.full
-*.kra
-*~
-~$*.odt
+img/keeb/ignore
+ignore
+.badignore
