@@ -9,9 +9,34 @@
 
 <body>
 <main>
-	<h1>Ergonominen <br><i>columnar stagger</i> <br>näppäimistö</h1>
-	<p>Liirum laarum</p>
-	<img src="img/keeb/1.jpg" class="scadLayersImage"></img>
+	<header class="banner">
+		<h1 class="bannerTitle">Ergonominen <br><i>columnar stagger</i> <br>näppäimistö</h1>
+	</header>
+	<img class="zeroView" src="img/keeb/real_zero_view.jpg" alt="Lähes orthograafinen kuva projektin näppäimistöstä"/>
+
+	<h1>Syyt projektille</h1>
+	<p>Olen pitkään ihmetellyt, miksi modernit näppäimistöt ovat aseteltu samalla tavalla kuin kirjoituskoneissa aikoinaan. Tämä asettelu, jossa kotiriviä <small>(ASDFG...)</small> ylempi rivi on siirretty vasemmalle 4.7625mm <small>(3/16")</small> ja kotirivin alempi rivi on siirretty oikealle 9.525mm <small>(3/8")</small>, johtui alunperin siitä, että kirjoituskoneiden mustetta paperiin lyövien vasarien vetimien on halvasti massatuotetussa menetelmässä oltava kaikki vierekkäin ilman suuria kulmia.</p>
+	 
+	<figure>
+		<img src="img/keeb/typewriter_colored.jpg" class="typewriterImage" alt="Ylhäältä katsottu kuva kirjoituskoneesta, jonka päälle on illustroitu kirjoituskoneen vasarien vetimien kulkemat reitit."/>
+		<figcaption>Suuntaa antava piirros kirjoituskoneen mekanismista. Kuva: minä</figcaption>
+	</figure>
+
+	<p>Illustraatiosta näkyy, miten eri rivien näppäimet kulkevat lomittain toistensa kanssa; <code>1 Q A 2 Z W S 3 X...</code> eli riveittäin (1) 2 3 1 4 2 3 1 4... Jos kirjoituskoneen vasarien vetimet olisivat kuitenkin L -kirjaimen muotoisia pysty-syvyys-akselilla, niin näppäimet voisivat olla suorissa riveissä muodostaen ortholineaarisen ristikon.</p>
+
+	<p>Tämä <i>row stagger</i> eli rivien porrastus ei kuitenkaan haitannut kirjoittamista liikaa, ja siihen ihmisten totuttua sitä oli turha alkaa korjaamaan, koska se aiheuttaisi tarpeen totutella muutokseen, johon kuluva tuntematon ajanmäärä ei ollut sen arvoista, varsinkin kun hyvää nopeutta kirjoittaminen oli tärkeää eri töissä, jolloin porrastuksen korjaaminen voisi vaikuttaa työnteon tehokkuuteen (samoin näppäinten QWERTY-asetelman kanssa).</p>
+
+	<p>Kyseinen muuttumattomuus jatkui myös kun kirjoituskoneet sähköistyivät, ja myös kun kirjoituskoneista siirryttiin tietokoneisiin ja niiden näppäimistöihin, koska ne joille uudet kirjoituslaitteet tehtiin, olivat ne jotka käyttivät edellisiäkin kirjoituslaitteita. Jos</p>
+
+	<figure id="qwertyKeyboard">
+		<div class="row">QWERTYUIOP</div>
+		<div class="row">&nbsp;ASDFGHJKL;</div>
+		<div class="row">&nbsp;&nbsp;&nbsp;ZXCVBNM,./</div>
+		<figcaption>Please enable JavaScript :c</figcaption>
+	</figure>
+
+	<h1>OpenSCAD</h1>
+	<img src="img/keeb/1.png" class="scadLayersImage"/>
 
 	<pre id="codeView" class="codeView"><code id="code">// Fragment number 
 //$fn = $preview ? 0 : 128;
@@ -741,11 +766,23 @@ boltHoles = [
 // Also try offset()t
 // > Very pog</code></pre>
 	<div style="display:none;">
-		<img src="img/keeb/1.jpg"></img>
-		<img src="img/keeb/2.jpg"></img>
-		<img src="img/keeb/3.jpg"></img>
-		<img src="img/keeb/4.jpg"></img>
+		<img src="img/keeb/1.png"/>
+		<img src="img/keeb/2.png"/>
+		<img src="img/keeb/3.png"/>
+		<img src="img/keeb/4.png"/>
 	</div>
+	<small>
+		<p style="text-align:left;">Tee raportti, jossa kerrot<br>
+		<ul>
+			<li>miksi päädyit tähän työhön</li>
+			<li>mitä ohjelmia käytit</li>
+			<li>miten rakensit toiminnallisuuden</li>
+			<li>miten etenit, mitä haasteita kohtasit ja miten ne ratkaisit</li>
+			<li>miten kehittäisit eteenpäin</li>
+		</ul>
+		Fokus siinä, että myyt osaamistasi yrityksille<br>
+			t. Maria</p>
+	</small>
 </main>
 </body>
 
@@ -783,4 +820,37 @@ boltHoles = [
 	});
 
 	autoScroll();
+
+
+	// Keyboard
+
+	const unit = 19.05;
+
+	const create_row = function( row, offset=0 )
+	{
+		//rowHTML = "";
+		rowHTML = `<div class="offset" style="width:${offset*unit}mm;"></div>`;
+		for ( i in row )
+		{
+			rowHTML += create_key( row[i] );
+		}
+		return `<div class="row">${rowHTML}</div>`;
+	}
+
+	const create_key = function( legend )
+	{
+		return `<div class="key"><div class="legend">${legend}</div></div>`;
+	}
+	
+	const offset_row = function( units )
+	{
+		return `<div class="offset" style="width:${units*19.05}mm;"></div>`;
+	}
+
+	const qwertyKeyboard = document.getElementById( "qwertyKeyboard" );
+
+	qwertyKeyboard.innerHTML = "";
+	qwertyKeyboard.innerHTML += create_row( "QWERTYUIOP" );
+	qwertyKeyboard.innerHTML += create_row( "ASDFGHJKL;", 0.25 );
+	qwertyKeyboard.innerHTML += create_row( "ZXCVBNM,./", 0.75 );
 </script>
