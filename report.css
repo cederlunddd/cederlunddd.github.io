@@ -9,11 +9,14 @@ main
 	display:flex;
 	flex-direction:column;
 	align-items:center;
+
+	margin:2em;
 }
 
 img
 {
 	max-width:100vw;
+	display:block;
 }
 
 p
@@ -22,14 +25,56 @@ p
 	text-align:justify;
 }
 
+a:hover
+{
+	font-style:italic;
+}
+
+figcaption
+{
+	color:#555;
+}
+
+.chapterLink
+{
+	text-decoration:none;
+	color:inherit;
+}
+
+.contents
+{
+	padding:0;
+}
+.contents li
+{
+	font-weight:bold;
+	font-size:1em;
+	margin-top:0.5em;
+	margin-bottom:0.5em;
+}
+.contents ul
+{
+	padding-left:1em;
+}
+.contents ul li
+{
+	font-weight:normal;
+	list-style:outside;
+}
+.contents a
+{
+	text-decoration:underline;
+	color:inherit;
+}
+
 .banner
 {
 	width:100%;
 
-	//background-color:#000;
-	//background-image:url("img/keeb/banner.jpg");
-	//background-size:cover;
-	//background-position:center;
+	/*background-color:#000;
+	background-image:url("img/keeb/banner.jpg");
+	background-size:cover;
+	background-position:center;*/
 }
 .bannerTitle
 {
@@ -44,7 +89,7 @@ p
 
 .zeroView
 {
-	max-width:500px;
+	width:500px;
 	margin:12em;
 	margin-left:0;
 	margin-right:0;
@@ -52,7 +97,7 @@ p
 
 .typewriterImage
 {
-	max-width:600px;
+	width:600px;
 
 	animation-name:swapTypewriterImages;
 	animation-duration:4s;
@@ -70,6 +115,41 @@ p
 	}
 }
 
+.thinkpadImage
+{
+	width:500px;
+	 
+	display:block;
+
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.firstKeebImage
+{
+	width:700px;
+}
+
+.collage
+{
+	display:flex;
+	flex-wrap:wrap;
+	width:46em;
+	max-width:100vw;
+}
+.collageImage
+{
+	object-fit:cover;
+
+	max-width:50vw;
+	width:23em;
+	height:16em;
+}
+
+.macbookKeyboard
+{
+	width:700px;
+}
 
 .scadLayersImage
 {
@@ -129,7 +209,7 @@ p
 	padding:2em;
 
 	height:300px;
-	max-width:calc(100vw - 4em);
+	max-width:calc(90vw - 4em);
 
 	border-radius:1em;
 
@@ -139,6 +219,12 @@ p
 .codeView code
 {
 }
+
+.prusaslicerImage
+{
+	width:700px;
+}
+
 
 .keyboard
 {

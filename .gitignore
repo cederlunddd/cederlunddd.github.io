@@ -1,2 +1,4 @@
 img/keeb/*.full
 *.kra
+*~
+~$*.odt

@@ -12,21 +12,39 @@
 	<header class="banner">
 		<h1 class="bannerTitle">Ergonominen <br><i>columnar stagger</i> <br>näppäimistö</h1>
 	</header>
-	<img class="zeroView" src="img/keeb/real_zero_view.jpg" alt="Lähes orthograafinen kuva projektin näppäimistöstä"/>
+	<img class="zeroView" src="img/keeb/real_zero_view.jpg" alt="Lähes isometrisesta kulmasta otettu kuva projektin näppäimistöstä"/>
 
-	<h1>Syyt projektille</h1>
-	<p>Olen pitkään ihmetellyt, miksi modernit näppäimistöt ovat aseteltu samalla tavalla kuin kirjoituskoneissa aikoinaan. Tämä asettelu, jossa kotiriviä <small>(ASDFG...)</small> ylempi rivi on siirretty vasemmalle 4.7625mm <small>(3/16")</small> ja kotirivin alempi rivi on siirretty oikealle 9.525mm <small>(3/8")</small>, johtui alunperin siitä, että kirjoituskoneiden mustetta paperiin lyövien vasarien vetimien on halvasti massatuotetussa menetelmässä oltava kaikki vierekkäin ilman suuria kulmia.</p>
+	<h2>Sisältö</h2>
+	<ol class="contents">
+		<a href="#Reasons_for_project"><li>Syyt projektillle</li></a>
+		<a href="#Software"><li>Ohjelmistot</li></a>
+		<ul>
+			<a href="#OpenSCAD"><li>OpenSCAD</li></a>
+			<a href="#PrusaSlicer"><li>PrusaSlicer</li></a>
+		</ul>
+		<a href="#Project"><li>Projekti</li></a>
+		<a href="#Post_mortem"><li>Post mortem</li></a>
+	</ol>
+
+	<p></p>
+
+	<a href="#Reasons_for_project" class="chapterLink"><h1 id="Reasons_for_project">1. Syyt projektille</h1></a>
+	<p>Olen pitkään ihmetellyt, miksi modernit näppäimistöt ovat aseteltu samalla tavalla kuin kirjoituskoneet aikoinaan. Tämä asettelu, jossa kotiriviä <small>(ASDFG...)</small> ylempi rivi on siirretty vasemmalle 4.7625mm <small>(3/16")</small> ja kotirivin alempi rivi on siirretty oikealle 9.525mm <small>(3/8")</small>, johtui alunperin siitä, että kirjoituskoneiden mustetta paperiin lyövien vasarien vetimien on halvasti massatuotetussa menetelmässä oltava kaikki vierekkäin ilman suuria kulmia.</p>
 	 
 	<figure>
 		<img src="img/keeb/typewriter_colored.jpg" class="typewriterImage" alt="Ylhäältä katsottu kuva kirjoituskoneesta, jonka päälle on illustroitu kirjoituskoneen vasarien vetimien kulkemat reitit."/>
-		<figcaption>Suuntaa antava piirros kirjoituskoneen mekanismista. Kuva: minä</figcaption>
+		<figcaption>Suuntaa antava piirros kirjoituskoneen mekanismista. <i>Kuva: minä</i></figcaption>
 	</figure>
 
-	<p>Illustraatiosta näkyy, miten eri rivien näppäimet kulkevat lomittain toistensa kanssa; <code>1 Q A 2 Z W S 3 X...</code> eli riveittäin (1) 2 3 1 4 2 3 1 4... Jos kirjoituskoneen vasarien vetimet olisivat kuitenkin L -kirjaimen muotoisia pysty-syvyys-akselilla, niin näppäimet voisivat olla suorissa riveissä muodostaen ortholineaarisen ristikon.</p>
+	<p>Illustraatiosta näkyy, miten eri rivien näppäimet kulkevat lomittain toistensa kanssa; <code>1 Q A 2 Z W S 3 X...</code> eli riveittäin (1) 2 3 1 4 2 3 1 4... Jos kirjoituskoneen vasarien vetimet olisivat L -kirjaimen muotoisia pysty-syvyys-akselilla, niin näppäimet voisivat olla suorissa sarakkeissa muodostaen ortholineaarisen ristikon.</p>
 
-	<p>Tämä <i>row stagger</i> eli rivien porrastus ei kuitenkaan haitannut kirjoittamista liikaa, ja siihen ihmisten totuttua sitä oli turha alkaa korjaamaan, koska se aiheuttaisi tarpeen totutella muutokseen, johon kuluva tuntematon ajanmäärä ei ollut sen arvoista, varsinkin kun hyvää nopeutta kirjoittaminen oli tärkeää eri töissä, jolloin porrastuksen korjaaminen voisi vaikuttaa työnteon tehokkuuteen (samoin näppäinten QWERTY-asetelman kanssa).</p>
+	<figure>
+		<img src="img/keeb/fingers_curled.jpg" class="thinkpadImage" alt=""/>
+		<img src="img/keeb/fingers_straight.jpg" class="thinkpadImage" alt=""/>
+		<figcaption style="text-align:center;">Sormien <i>luonnollinen</i> liikkumissuunta näppäimistöllä kotiriviltä. <i>Kuva: minä</i></figcaption>
+	</figure>
 
-	<p>Kyseinen muuttumattomuus jatkui myös kun kirjoituskoneet sähköistyivät, ja myös kun kirjoituskoneista siirryttiin tietokoneisiin ja niiden näppäimistöihin, koska ne joille uudet kirjoituslaitteet tehtiin, olivat ne jotka käyttivät edellisiäkin kirjoituslaitteita. Jos</p>
+	<p>Tämä <i>row stagger</i> eli rivien porrastus ei kuitenkaan haitannut kirjoittamista liikaa, ja siihen ihmisten totuttua oli turha alkaa korjaamaan, koska se aiheuttaisi tarpeen totutella muutokseen, johon kuluva tuntematon ajanmäärä ei ollut sen arvoista, varsinkin kun hyvää nopeutta kirjoittaminen oli tärkeää eri työtehtävissä, jolloin porrastuksen korjaaminen voisi vaikuttaa työnteon tehokkuuteen (sama näppäinten QWERTY-asetelman kanssa).</p>
 
 	<figure id="qwertyKeyboard">
 		<div class="row">QWERTYUIOP</div>
@@ -35,9 +53,47 @@
 		<figcaption>Please enable JavaScript :c</figcaption>
 	</figure>
 
-	<h1>OpenSCAD</h1>
-	<img src="img/keeb/1.png" class="scadLayersImage"/>
+	<p>Kyseinen muuttumattomuus jatkui myös kun kirjoituskoneet sähköistyivät, ja kun kirjoituskoneista siirryttiin tietokoneisiin ja niiden näppäimistöihin, koska ne joille uudet kirjoituslaitteet tehtiin, olivat ne jotka olivat käyttäneet edellisiäkin kirjoituslaitteita. Se valmistaja joka olisi aloittanut muutoksen, olisi kärsinyt siitä myynneissään ja tuote olisi todennäköisesti epäonnistunut.</p>
 
+	<p>Näin ollen, ne harvat valmistajat jotka nykyään tuottavat näppäimistöjä ilman rivien porrastusta joutuvat asettamaan kyseisille tuotteille korkeamman hinnan myynnin alhaisen määrän vuoksi. Itse en halua (tai pysty) maksamaan yli viittäkymmentä euroa näppäimistöstä, niin päätin kokeilla tehdä ortholineaarisen näppäimistön itse. Sain tämän ensimmäisen näppäimistöni tehtyä ~2018, mutta 2022 purin sen osiin koska halusin käyttää samoja osia (varsinkin kytkimiä) uuden näppäimistön rakentamiseen. Tämä kuitenkin viivästyi.</p>
+
+	<figure>
+		<img src="img/keeb/first_keeb.jpg" class="firstKeebImage" alt="Ortholineaarinen näppäimistö, jossa on 5 riviä ja 14 saraketta."/>
+		<figcaption>Ensimmäinen tekemäni näppäimistö.</figcaption>
+	</figure>
+
+	<p>Koska olin jo päässyt kokeilemaan ortholineaarisella kirjoittamista edellisellä näppäimistölläni, suunnittelin seuraavaksi rakentaa ergonomisemman näppäimistön jonka sarakkeet olisivat porrastettuja, yrittäen muotoilla näppäimistön asettelua ihmiskädelle, jonka sormet lähtevät kämmenestä eri kohdista ja ovat myös eri pituisia. Olin kuitenkin epävarma kyseisen projektin toteuttamisesta, koska käytin tuolloin rivi-porrastettua näppäimistöä, ja ajattelin että siitä vaihtaminen suoraan sarake-porrastettuun voisi olla liian suuri muutos.</p>
+
+	<p>Työstin erilaisia enempi ja vähempi ergonomisia konsepteja ennen kuin päädyin toteuttamaani suunnitelmaan. Tarve uudelle näppäimistölle jota voisin kuljettaa mukanani laukussani kasvoi ensimmäisen TOP-jakson lähestyessä, koska kannettavan tietokoneeni näppäimistöstä puuttuu muutama näppäin, ja sen kaksi saraketta jopa lakkasi toimimasta täysin kyseisen TOP-jakson aikana.</p>
+
+	<figure>
+		<div class="collage">
+			<img src="img/keeb/col3.jpg" class="collageImage" alt="Vasen puoli ergonomisesti kaartuvaa näppäimistöä."/>
+			<img src="img/keeb/col4.jpg" class="collageImage" alt="Vasen puoli ergonomisesti vaihtelevasti kaartuvaa näppäimistöä."/>
+			<img src="img/keeb/col1.jpg" class="collageImage" alt="Vasen puoli ergonomisesti jyrkästi kaartuvaa näppäimistöä."/>
+			<img src="img/keeb/col2.jpg" class="collageImage" alt="Vasen puoli ergonomista muunneltavaa näppäimistöä."/>
+		</div>
+		<figcaption>Näppäimistö konsepteja.</figcaption>
+	</figure>
+
+	<figure>
+		<img src="img/keeb/macbook_keyboard.jpg" class="macbookKeyboard" alt="MacBook Air 2014 näppäimistö."/>
+		<figcaption>Kannettavani näppäimistö ja sen puuttuvat <code>,</code> ja <code>.</code> näppäimet.</figcaption>
+	</figure>
+
+	<p>Aikaa TOP-jakson alkuun oli enää kaksi viikkoa, ja halusin saada mukavamman kirjoittamiskokemuksen siihen mennessä valmiiksi. Täten ryhdyin työstämään väliaikaista näppäimistöä, joka on tämän raportin keskitys.</p>
+
+	<p></p>
+
+	<a href="#Software" class="chapterLink"><h1 id="Software">2. Ohjelmistot</h1></a>
+	<a href="#OpenSCAD" class="chapterLink"><h1 id="OpenSCAD">OpenSCAD</h1></a>
+	<img src="img/keeb/1.png" class="scadLayersImage" alt="Näkymä näppäimistön kolmesta kerroksesta erikseen, ja yhteen pinottuina muodostaen näppäimistön kotelon."/>
+
+	<p>Ennen kyseistä projektia olin tottunut käyttämään kaikkiin CAD-tarpeisiini FreeCAD -ohjelmistoa. FreeCAD'issa on kuitenkin useita ongelmia käyttöliittymään liittyen, sekä <i>undo</i> ja <i>redo</i> -komentojen kanssa, joka joskus johtaa ohjelmiston kaatumiseen. Olin jonkin aikaa suunnitellut kokeilla OpenSCAD -ohjelmistoa sen muokkaamisen käyttöliittymättömyyden vuoksi, sekä siksi, että se on täydellisemmin parametrinen kuin FreeCAD.</p>
+
+	<p>Käyttöliittymän sijaan, OpenSCAD'issa 3D mallit luodaan kirjoittamalla OpenSCAD'in omaa koodikieltä <code>.scad</code> tiedostoihin. Kyseisiä 3D malleja pystyy esikatselemaan OpenSCAD'in ohjelmistolla. Näin syntyy OpenSCAD'in käyttökokemus, koodia kirjoitetaan tiedostoon ja sen tallentaessa 3D malli päivittyy ohjelmiston 3D-näkymään automaattisesti jos se on auki, jolloin näkee tekemänsä muutokset. Verrattuna FreeCAD'iin, OpenSCAD on hyvin suoritustehoinen, sillä laskutoimitukset koodissa ovat usein yksinkertaisempia kuin FreeCAD'in restriction-perusteiset laskut. Tämä kuitenkin tarkoittaa myös, että OpenSCAD soveltuu parhaiten yksinkertaisemman geometrian luomiseen.</p>
+
+	<figure>
 	<pre id="codeView" class="codeView"><code id="code">// Fragment number 
 //$fn = $preview ? 0 : 128;
 // Fragment angle
@@ -765,6 +821,23 @@ boltHoles = [
 
 // Also try offset()t
 // > Very pog</code></pre>
+	<figcaption>Näppäimistön kotelon lähdekoodi.</figcaption>
+	</figure>
+
+	<p>OpenSCAD soveltui hyvin kyseiseen projektiin ja arvostan sen nopeutta sekä hauskuutta käyttää paljon, mutta en kuitenkaan pysty jättämään FreeCAD'ia kokonaan, sillä esimerkiksi orgaanisen tai muuten kurvikkaan geometrian luominen on liian haastavaa minulle tällä hetkellä OpenSCAD'issä.</p>
+
+	<a href="#PrusaSlicer" class="chapterLink"><h1 id="PrusaSlicer">PrusaSlicer</h1></a>
+
+	<img src="img/keeb/prusaslicer.png" class="prusaslicerImage"/>
+
+	<p>PrusaSlicer on pitkään ollut käyttämäni 3D-tulostettavien tiedostojen slicer. Vaikka joitain hyödyllisiä ominaisuuksia jotka löytyisivät esimerkiksi Cura'sta (josta vaihdoin PrusaSlicer'iin) ei ole, niin saan silti tulostettua mitä tarvitsen. Ohjelmisto soveltui hyvin projektiin.</p>
+
+	<a href="#Project" class="chapterLink"><h1 id="Project">Projekti</h1></a>
+
+	<p></p>
+
+	<a href="#Post_mortem" class="chapterLink"><h1 id="Post_mortem">Post mortem</h1></a>
+
 	<div style="display:none;">
 		<img src="img/keeb/1.png"/>
 		<img src="img/keeb/2.png"/>
@@ -776,7 +849,7 @@ boltHoles = [
 		<ul>
 			<li>miksi päädyit tähän työhön</li>
 			<li>mitä ohjelmia käytit</li>
-			<li>miten rakensit toiminnallisuuden</li>
+			<li>miten rakensit toiminnallisuuden (???)</li>
 			<li>miten etenit, mitä haasteita kohtasit ja miten ne ratkaisit</li>
 			<li>miten kehittäisit eteenpäin</li>
 		</ul>
@@ -853,4 +926,5 @@ boltHoles = [
 	qwertyKeyboard.innerHTML += create_row( "QWERTYUIOP" );
 	qwertyKeyboard.innerHTML += create_row( "ASDFGHJKL;", 0.25 );
 	qwertyKeyboard.innerHTML += create_row( "ZXCVBNM,./", 0.75 );
+	qwertyKeyboard.innerHTML += "<figcaption>Porrastamattoman näppäimistön ero.</figcaption>";
 </script>
