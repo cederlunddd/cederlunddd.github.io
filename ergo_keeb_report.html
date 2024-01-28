@@ -39,8 +39,8 @@
 	<p>Illustraatiosta näkyy, miten eri rivien näppäimet kulkevat lomittain toistensa kanssa; <code>1 Q A 2 Z W S 3 X...</code> eli riveittäin (1) 2 3 1 4 2 3 1 4... Jos kirjoituskoneen vasarien vetimet olisivat L -kirjaimen muotoisia pysty-syvyys-akselilla, niin näppäimet voisivat olla suorissa sarakkeissa muodostaen ortholineaarisen ristikon.</p>
 
 	<figure>
-		<img src="img/keeb/fingers_curled.jpg" class="thinkpadImage" alt=""/>
-		<img src="img/keeb/fingers_straight.jpg" class="thinkpadImage" alt=""/>
+		<img src="img/keeb/fingers_curled.jpg" class="thinkpadImage" alt="Kädet näppäimistöllä sormet kourussa."/>
+		<img src="img/keeb/fingers_straight.jpg" class="thinkpadImage" alt="Kädet näppäimistöllä sormet suorana."/>
 		<figcaption style="text-align:center;">Sormien <i>luonnollinen</i> liikkumissuunta näppäimistöllä kotiriviltä. <i>Kuva: minä</i></figcaption>
 	</figure>
 
@@ -64,7 +64,7 @@
 
 	<p>Koska olin jo päässyt kokeilemaan ortholineaarisella kirjoittamista edellisellä näppäimistölläni, suunnittelin seuraavaksi rakentaa ergonomisemman näppäimistön jonka sarakkeet olisivat porrastettuja, yrittäen muotoilla näppäimistön asettelua ihmiskädelle, jonka sormet lähtevät kämmenestä eri kohdista ja ovat myös eri pituisia. Olin kuitenkin epävarma kyseisen projektin toteuttamisesta, koska käytin tuolloin rivi-porrastettua näppäimistöä, ja ajattelin että siitä vaihtaminen suoraan sarake-porrastettuun voisi olla liian suuri muutos.</p>
 
-	<p>Työstin erilaisia enempi ja vähempi ergonomisia konsepteja ennen kuin päädyin toteuttamaani suunnitelmaan. Tarve uudelle näppäimistölle jota voisin kuljettaa mukanani laukussani kasvoi ensimmäisen TOP-jakson lähestyessä, koska kannettavan tietokoneeni näppäimistöstä puuttuu muutama näppäin, ja sen kaksi saraketta jopa lakkasi toimimasta täysin kyseisen TOP-jakson aikana.</p>
+	<p>Työstin erilaisia enempi ja vähempi ergonomisia prototyyppejä ennen kuin päädyin toteuttamaani suunnitelmaan. Tarve uudelle näppäimistölle jota voisin kuljettaa mukanani laukussani kasvoi ensimmäisen TOP-jakson lähestyessä, koska kannettavan tietokoneeni näppäimistöstä puuttuu muutama näppäin, ja sen kaksi saraketta jopa lakkasi toimimasta täysin kyseisen TOP-jakson aikana.</p>
 
 	<figure>
 		<div class="collage">
@@ -73,7 +73,7 @@
 			<img src="img/keeb/col1.jpg" class="collageImage" alt="Vasen puoli ergonomisesti jyrkästi kaartuvaa näppäimistöä."/>
 			<img src="img/keeb/col2.jpg" class="collageImage" alt="Vasen puoli ergonomista muunneltavaa näppäimistöä."/>
 		</div>
-		<figcaption>Näppäimistö konsepteja.</figcaption>
+		<figcaption>Näppäimistö prototyyppejä.</figcaption>
 	</figure>
 
 	<figure>
@@ -834,15 +834,49 @@ boltHoles = [
 
 	<a href="#Project" class="chapterLink"><h1 id="Project">Projekti</h1></a>
 
+	<p>Koska suunnittelin näppäimistön käytettäväksi pääasiassa kannettavan tietokoneeni kanssa, niin aloitin projektin mittaamalla sen alaosan, sisältäen näppäimistön ja kosketuslevyn, jotta voisin luoda siitä viitemallin. Halusin että asettamani kumijalat näppäimistössä menisivät kannettavan näppäimistön väleihin, joka vähetäisi sen liikkumista, ja että kannettavan kosketuslevyä voisi käyttää uuden näppäimistön ollessa kannettavan päällä.</p>
+
+	<figure class="macbookModelImage" >
+		<img src="img/keeb/macbook_model.png"class="macbookModelImage"  alt="Kuva yksinkertaisesta 3D-mallista kannettavasta tietokoneesta ilman näyttöä."/>
+		<figcaption>Viitemalli kannettavasta tietokoneestani. Mallin koodi löytyy lähdekoodista kohdasta <code>// Macbook</code></figcaption>
+	</figure>
+
+	<p>Ennen varsinaisen näppäimistön mallintamisen aloittamista, mallinsin testilevyn, jolla pystyin testaamaan näppäimistön kytkimien, sekä kotelon pulttien mahtuvuutta 3D-tulostetusta palasta, koska 3D-tulostimet harvoin tulostavat 1:1 mittaisia reikiä. Kytkimien aukkoihin käytin viitteenä <a href="http://www.keyboard-layout-editor.com/">KeyboardLayoutEditor</a>'in luomia kytkimien aukkoja, koska niihin olin tottunut ensimmäisen näppäimistön rakentamisesta.</p>
+
+	<figure>
+		<img src="img/keeb/test_plate.png" class="testPlateImage" alt="Kuva 3D-mallista jossa on 2x4-matriisi aukkoja näppäinkytkimille ja neljä erikokoista pyöreää aukkoa jokaisessa kulmassa pulteille."/>
+		<figcaption>Testilevyn malli.</figcaption>
+	</figure>
+
+	<p>Testilevyjä tulostellessa aloin samanaikaisesti työstämään näppäimistöä, aloittamalla kytkinlevystä, koska sitä suunnitellessa päättäisin myös kytkimien asettelun, eli näppäinten asettelun, joka puolestaan ohjaa koko näppäimistön muotoa ja suunnittelua. Aikaisemmista prototyypeistä oli apua, varsinkin viimeisestä <small>(neljäs kuva)</small>, koska sen sarakkeiden syvyyttä pystyi muuttamaan, ja näin pääsin vähän kokeilemaan eri asetelmia.</p>
+
+	<p>Näppäinten asettelua suunnitellessa pyrin huomioimaan sitä asentoa mihin käteni haluavat luonollisesti asettua edessäni pöydällä, sekä sitä mihin sormeni ylttävät helposti. Suunnittelua kuitenkin rajoitti 3D-tulostimeni tulostusalueen koko, jonka vuoksi en olisi esimerkiksi pystynyt lisäämään pikkurillille toista saraketta näppäimiä, vaikka en näin halunnutkaan tehdä, koska halusin näppäimistön olevan mahdollisimman pieni mutta käytännöllinen. Pikkurilli myös on heikoin sormi, niin en senkään vuoksi halunnut antaa sille liikaa rasitusta käytössä.</p>
+
+	<figure>
+		<img src="img/keeb/parametry_photo1.jpg" class="parametryImage" alt=""/>
+		<img src="img/keeb/parametry_photo2.jpg" class="parametryImage" alt=""/>
+		<figcaption>Parametrisen mallinnuksen etuja, yhden muuttujan arvoa muuttamalla.</figcaption>
+	</figure>
+
+	<p>Näppäinasetelma mihin päädyin oli kolme riviä ja viisi saraketta plus neljä peukalo-näppäintä per käsi, 1/4u sarakkeiden syvyyserolla, kun u on 19.05mm tai 3/4", eli yhden näppäimen tila. Keskisormen sarake on siis kauimpana, ja syvyys laskee siitä 4.7625mm per sarake, joten nimettömän ja etusormen sarakkeet ovat samalla tasolla, kuten ovat pikkurillin sarake ja etusormen lisäsarake. Tein tämän sekä symmetrisyyden vuoksi, että sen vuoksi että sarakkeiden ero ei olisi liian suuri, jolloin siihen olisi helppo tottua. En myöskään vielä tiennyt millaista asetelmaa suosisin pitkällä aikavälillä vain prototyyppien perusteella.</p>
+
+	<figure class="firstPlateImage">
+		<img src="img/keeb/first_plate.jpg" class="firstPlateImage" alt=""/>
+		<figcaption>Ensimmäinen kytkinlevy. Lopullisen levyn lähdekoodi löytyy kohdasta <code>// Outemu columnar plate</code></figcaption>
+	</figure>
+
 	<p></p>
 
 	<a href="#Post_mortem" class="chapterLink"><h1 id="Post_mortem">Post mortem</h1></a>
 
-	<div style="display:none;">
+	<div id="imagePreload" style="display:none;">
+		<p>Preloading of images to avoid buggy animation.</p>
 		<img src="img/keeb/1.png"/>
 		<img src="img/keeb/2.png"/>
 		<img src="img/keeb/3.png"/>
 		<img src="img/keeb/4.png"/>
+		<img src="img/keeb/typewriter.jpg"/>
+		<img src="img/keeb/typewriter_colored.jpg"/>
 	</div>
 	<small>
 		<p style="text-align:left;">Tee raportti, jossa kerrot<br>
@@ -862,6 +896,8 @@ boltHoles = [
 </html>
 
 <script>
+	document.getElementById( "imagePreload" ).remove();
+
 	const codeView = document.getElementById( "codeView" );
 
 	let scroll = true;

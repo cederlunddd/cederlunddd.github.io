@@ -1,3 +1,8 @@
+html
+{
+	background-color:#fafafa;
+}
+
 html, body
 {
 	margin:0;
@@ -15,8 +20,11 @@ main
 
 img
 {
-	max-width:100vw;
 	display:block;
+}
+img, figure
+{
+	max-width:100vw;
 }
 
 p
@@ -25,6 +33,10 @@ p
 	text-align:justify;
 }
 
+a
+{
+	color:inherit;
+}
 a:hover
 {
 	font-style:italic;
@@ -33,6 +45,7 @@ a:hover
 figcaption
 {
 	color:#555;
+	font-size:0.95rem;
 }
 
 .chapterLink
@@ -44,13 +57,14 @@ figcaption
 .contents
 {
 	padding:0;
+
+	margin-bottom:10em;
 }
 .contents li
 {
 	font-weight:bold;
 	font-size:1em;
-	margin-top:0.5em;
-	margin-bottom:0.5em;
+	margin-bottom:1em;
 }
 .contents ul
 {
@@ -223,6 +237,21 @@ figcaption
 .prusaslicerImage
 {
 	width:700px;
+}
+
+.parametryImage
+{
+	width:700px;
+}
+
+.firstPlateImage
+{
+	width:800px;
+}
+
+.macbookModelImage
+{
+	width:600px;
 }
 
 
