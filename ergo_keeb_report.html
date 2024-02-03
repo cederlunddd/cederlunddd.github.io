@@ -23,6 +23,9 @@
 			<a href="#PrusaSlicer"><li>PrusaSlicer</li></a>
 		</ul>
 		<a href="#Project"><li>Projekti</li></a>
+		<ul>
+			<a href="#Parts"><li>Osien 3D-mallit</li></a>
+		</ul>
 		<a href="#Post_mortem"><li>Post mortem</li></a>
 	</ol>
 
@@ -86,7 +89,7 @@
 	<p></p>
 
 	<a href="#Software" class="chapterLink"><h1 id="Software">2. Ohjelmistot</h1></a>
-	<a href="#OpenSCAD" class="chapterLink"><h1 id="OpenSCAD">OpenSCAD</h1></a>
+	<a href="#OpenSCAD" class="chapterLink"><h2 id="OpenSCAD">OpenSCAD</h2></a>
 	<img src="img/keeb/1.png" class="scadLayersImage" alt="Näkymä näppäimistön kolmesta kerroksesta erikseen, ja yhteen pinottuina muodostaen näppäimistön kotelon."/>
 
 	<p>Ennen kyseistä projektia olin tottunut käyttämään kaikkiin CAD-tarpeisiini FreeCAD -ohjelmistoa. FreeCAD'issa on kuitenkin useita ongelmia käyttöliittymään liittyen, sekä <i>undo</i> ja <i>redo</i> -komentojen kanssa, joka joskus johtaa ohjelmiston kaatumiseen. Olin jonkin aikaa suunnitellut kokeilla OpenSCAD -ohjelmistoa sen muokkaamisen käyttöliittymättömyyden vuoksi, sekä siksi, että se on täydellisemmin parametrinen kuin FreeCAD.</p>
@@ -826,7 +829,7 @@ boltHoles = [
 
 	<p>OpenSCAD soveltui hyvin kyseiseen projektiin ja arvostan sen nopeutta sekä hauskuutta käyttää paljon, mutta en kuitenkaan pysty jättämään FreeCAD'ia kokonaan, sillä esimerkiksi orgaanisen tai muuten kurvikkaan geometrian luominen on liian haastavaa minulle tällä hetkellä OpenSCAD'issä.</p>
 
-	<a href="#PrusaSlicer" class="chapterLink"><h1 id="PrusaSlicer">PrusaSlicer</h1></a>
+	<a href="#PrusaSlicer" class="chapterLink"><h2 id="PrusaSlicer">PrusaSlicer</h2></a>
 
 	<img src="img/keeb/prusaslicer.png" class="prusaslicerImage"/>
 
@@ -872,24 +875,65 @@ boltHoles = [
 		<figcaption>Valitsemani infill-kuvio loi mukavasti satunnaisen tekstuurin.</figcaption>
 	</figure>
 
-	<figure class="">
-		<img src="img/keeb/base_rotation/tq_test.png" class="" alt=""/>
-		<figcaption>Pohjan 3D-malli.</figcaption>
+	<script>
+	const move_images = function( _event, value )
+	{
+		let percent = 1.0 - value/100.0;
+
+		const top = document.getElementById( "topSpin" );
+		const plate = document.getElementById( "plateSpin" );
+		const base = document.getElementById( "baseSpin" );
+
+		top.getElementsByTagName( "figcaption" )[0].style.opacity = `${1-percent}`;
+		plate.getElementsByTagName( "figcaption" )[0].style.opacity = `${1-percent}`;
+		base.getElementsByTagName( "figcaption" )[0].style.opacity = `${1-percent}`;
+		base.getElementsByTagName( "figcaption" )[1].style.opacity = `${percent}`;
+
+		const plateImage = plate.getElementsByTagName( "img" )[0]
+		const baseImage = base.getElementsByTagName( "img" )[0]
+
+		plateImage.style.marginTop = `calc( (-${plateImage.getBoundingClientRect().height}px - 1.5em) * ${percent} )`;
+		baseImage.style.marginTop = `calc( (-${baseImage.getBoundingClientRect().height}px - 1.5em) * ${percent} )`;
+	}
+
+	const reapply_value = function()
+	{
+		document.getElementById( "slider" ).value = document.getElementById( "slider" ).value;
+		move_images( null, document.getElementById( "slider" ).value );
+	}
+
+	const reset_value = function()
+	{
+		document.getElementById( "slider" ).value = 100;
+	}
+
+	window.onresize = reapply_value;
+	window.onload = reset_value;
+	</script>
+
+	
+	<a href="#Parts" class="chapterLink"><h2 id="Parts">Osien 3D-mallit</h2></a>
+	<div class="sandwichSlider">
+		<label for="slider">0%</label>
+		<input id="slider" type="range" value="100" style="z-index:0; autocomplete:off;" onChange="move_images( event, value )" onInput="move_images( event, value )"/>
+		<label for="slider">100%</label>
+	</div>
+	<small>( Muuta mallien etäisyyttä tästä )</small>
+
+	<figure class="topSpinImage" id="topSpin">
+		<img src="img/keeb/top_rotation/frame00000.png" class="topSpinImage" alt=""/>
+		<figcaption>Päällisen 3D-malli.</figcaption>
 	</figure>
 
-	<figure class="baseSpinImage">
-		<img src="img/keeb/base_rotation/frame00000.png" class="baseSpinImage" alt=""/>
-		<figcaption>Pohjan 3D-malli.</figcaption>
-	</figure>
-
-	<figure class="plateSpinImage">
+	<figure class="plateSpinImage" id="plateSpin">
 		<img src="img/keeb/plate_rotation/frame00000.png" class="plateSpinImage" alt=""/>
 		<figcaption>Levyn 3D-malli.</figcaption>
 	</figure>
 
-	<figure class="topSpinImage">
-		<img src="img/keeb/top_rotation/frame00000.png" class="topSpinImage" alt=""/>
-		<figcaption>Päällisen 3D-malli.</figcaption>
+	<figure class="baseSpinImage" id="baseSpin">
+		<img src="img/keeb/base_rotation/frame00000.png" class="baseSpinImage" alt=""/>
+		<figcaption>Pohjan 3D-malli.</figcaption>
+		<figcaption style="opacity:0;">Kotelon yhdistetty 3D-malli.</figcaption>
 	</figure>
 
 	<a href="#Post_mortem" class="chapterLink"><h1 id="Post_mortem">Post mortem</h1></a>
