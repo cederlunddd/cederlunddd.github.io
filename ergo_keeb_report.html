@@ -872,8 +872,29 @@ boltHoles = [
 
 	<figure class="patternImage">
 		<img src="img/keeb/pattern.jpg" class="patternImage" alt=""/>
-		<figcaption>Valitsemani infill-kuvio loi mukavasti satunnaisen tekstuurin.</figcaption>
+		<figcaption>Valitsemani infill-kuvio loi mukavan satunnaisen tekstuurin.</figcaption>
 	</figure>
+
+	<p>Alunperin en ollut huomioinut koteloon sitä, kuinka paljon tilaa pulttien mutterit veisivät pohjassa. Tämän takia kytkinlevy oli hieman pienempi pinta-alaltaan kuin mitä kotelon pitäisi olla, jotta mutterit jäisivät piiloon. Täten päätin lisätä pohjaan pienen jalkatason, johon mutterit jäisivät piiloon. Pohjan kuopat muttereille olivat kuitenkin liian pieniä, ja en saanut niitä paikalle edes kolvilla kuumentamalla. Tämän vuoksi nostin pohjan pinta-alaa vielä lisää, jota mutterit mahtuisivat paremmin. Lisäksi muutin pohjan reunuksen olemaan kalteva, koska en pitänyt siitä miltä laajennettu jalka näytti.</p>
+
+	<figure class="originalBaseImage">
+		<img src="img/keeb/original_base.jpg" class="originalBaseImage" alt=""/>
+		<figcaption>Alkuperäinen pohja laajennetulla jalalla.</figcaption>
+	</figure>
+
+	<figure class="firstAssemblyImage">
+		<img src="img/keeb/first_assembly.jpg" class="firstAssemblyImage" alt=""/>
+		<figcaption>Uusi kaltevareunainen pohja ja valmis päällinen kytkinten ja vanhan näppäimistön näppäinten kanssa.</figcaption>
+	</figure>
+
+	<p>Päällisen mallintaminen oli haastavin osa projektia. Vaikka minulla oli hieman ongelmia boolean-operaatioiden kanssa pohjan mallintamisessa, ne olivat helpompia korjata kuin mitä päällisen kanssa tuli vastaan. Päällisen mallintamisen olisi pitänyt olla helppoa; laajentaa levyn ulkoreunan mallia ylöspäin ja luo aukot näppäinten paikkojen perusteella. Ongelmana kuitenkin oli, että kun loin jokaisen näppäimen perusteella uuden boolean operaation, niiden sisikkyys toistensa kanssa loi ongelmia peräkkäisten, yhdistettyjen ja peilattujen boolean-operaatioiden kanssa kun loin boolean-operaation jokaisen näppäimen kohdalla. Jouduin luomaan yhtenäisen uuden muodon, jolla suorittaa yksittäinen boolean-operaatio, jonka tuloksen vasta putsasin ja peilasin luodakseni symmetrisen muodon, jotta selvisin päällisestä.</p>
+
+	<figure class="wiringImage">
+		<img src="img/keeb/wiring.jpg" class="wiringImage" alt=""/>
+		<figcaption>Näppäimistön onneksi piiloon jäävä johdotus.</figcaption>
+	</figure>
+
+	<a href="#Parts" class="chapterLink"><h2 id="Parts">Osien 3D-mallit</h2></a>
 
 	<script>
 	const move_images = function( _event, value )
@@ -889,8 +910,8 @@ boltHoles = [
 		base.getElementsByTagName( "figcaption" )[0].style.opacity = `${1-percent}`;
 		base.getElementsByTagName( "figcaption" )[1].style.opacity = `${percent}`;
 
-		const plateImage = plate.getElementsByTagName( "img" )[0]
-		const baseImage = base.getElementsByTagName( "img" )[0]
+		const plateImage = plate.getElementsByTagName( "img" )[0];
+		const baseImage = base.getElementsByTagName( "img" )[0];
 
 		plateImage.style.marginTop = `calc( (-${plateImage.getBoundingClientRect().height}px - 1.5em) * ${percent} )`;
 		baseImage.style.marginTop = `calc( (-${baseImage.getBoundingClientRect().height}px - 1.5em) * ${percent} )`;
@@ -911,8 +932,6 @@ boltHoles = [
 	window.onload = reset_value;
 	</script>
 
-	
-	<a href="#Parts" class="chapterLink"><h2 id="Parts">Osien 3D-mallit</h2></a>
 	<div class="sandwichSlider">
 		<label for="slider">0%</label>
 		<input id="slider" type="range" value="100" style="z-index:0; autocomplete:off;" onChange="move_images( event, value )" onInput="move_images( event, value )"/>
@@ -938,15 +957,112 @@ boltHoles = [
 
 	<a href="#Post_mortem" class="chapterLink"><h1 id="Post_mortem">Post mortem</h1></a>
 
-	<div id="imagePreload" style="display:none;">
+	<div id="imagePreload" style="display:block;opacity:0;position:fixed;">
 		<p>Preloading of images to avoid buggy animation.</p>
+		<p>Causes flashing of animated images, but the alternative is worse.</p>
+
+		<img src="img/keeb/typewriter.jpg"/>
+		<img src="img/keeb/typewriter_colored.jpg"/>
+
 		<img src="img/keeb/1.png"/>
 		<img src="img/keeb/2.png"/>
 		<img src="img/keeb/3.png"/>
 		<img src="img/keeb/4.png"/>
-		<img src="img/keeb/typewriter.jpg"/>
-		<img src="img/keeb/typewriter_colored.jpg"/>
+
+		<img src="img/keeb/top_rotation/frame00000.png"/>
+		<img src="img/keeb/top_rotation/frame00001.png"/>
+		<img src="img/keeb/top_rotation/frame00002.png"/>
+		<img src="img/keeb/top_rotation/frame00003.png"/>
+		<img src="img/keeb/top_rotation/frame00004.png"/>
+		<img src="img/keeb/top_rotation/frame00005.png"/>
+		<img src="img/keeb/top_rotation/frame00006.png"/>
+		<img src="img/keeb/top_rotation/frame00007.png"/>
+		<img src="img/keeb/top_rotation/frame00008.png"/>
+		<img src="img/keeb/top_rotation/frame00009.png"/>
+		<img src="img/keeb/top_rotation/frame00010.png"/>
+		<img src="img/keeb/top_rotation/frame00011.png"/>
+		<img src="img/keeb/top_rotation/frame00012.png"/>
+		<img src="img/keeb/top_rotation/frame00013.png"/>
+		<img src="img/keeb/top_rotation/frame00014.png"/>
+		<img src="img/keeb/top_rotation/frame00015.png"/>
+		<img src="img/keeb/top_rotation/frame00016.png"/>
+		<img src="img/keeb/top_rotation/frame00017.png"/>
+		<img src="img/keeb/top_rotation/frame00018.png"/>
+		<img src="img/keeb/top_rotation/frame00019.png"/>
+		<img src="img/keeb/top_rotation/frame00020.png"/>
+		<img src="img/keeb/top_rotation/frame00021.png"/>
+		<img src="img/keeb/top_rotation/frame00022.png"/>
+		<img src="img/keeb/top_rotation/frame00023.png"/>
+		<img src="img/keeb/top_rotation/frame00024.png"/>
+		<img src="img/keeb/top_rotation/frame00025.png"/>
+		<img src="img/keeb/top_rotation/frame00026.png"/>
+		<img src="img/keeb/top_rotation/frame00027.png"/>
+		<img src="img/keeb/top_rotation/frame00028.png"/>
+		<img src="img/keeb/top_rotation/frame00029.png"/>
+
+		<img src="img/keeb/plate_rotation/frame00000.png"/>
+		<img src="img/keeb/plate_rotation/frame00001.png"/>
+		<img src="img/keeb/plate_rotation/frame00002.png"/>
+		<img src="img/keeb/plate_rotation/frame00003.png"/>
+		<img src="img/keeb/plate_rotation/frame00004.png"/>
+		<img src="img/keeb/plate_rotation/frame00005.png"/>
+		<img src="img/keeb/plate_rotation/frame00006.png"/>
+		<img src="img/keeb/plate_rotation/frame00007.png"/>
+		<img src="img/keeb/plate_rotation/frame00008.png"/>
+		<img src="img/keeb/plate_rotation/frame00009.png"/>
+		<img src="img/keeb/plate_rotation/frame00010.png"/>
+		<img src="img/keeb/plate_rotation/frame00011.png"/>
+		<img src="img/keeb/plate_rotation/frame00012.png"/>
+		<img src="img/keeb/plate_rotation/frame00013.png"/>
+		<img src="img/keeb/plate_rotation/frame00014.png"/>
+		<img src="img/keeb/plate_rotation/frame00015.png"/>
+		<img src="img/keeb/plate_rotation/frame00016.png"/>
+		<img src="img/keeb/plate_rotation/frame00017.png"/>
+		<img src="img/keeb/plate_rotation/frame00018.png"/>
+		<img src="img/keeb/plate_rotation/frame00019.png"/>
+		<img src="img/keeb/plate_rotation/frame00020.png"/>
+		<img src="img/keeb/plate_rotation/frame00021.png"/>
+		<img src="img/keeb/plate_rotation/frame00022.png"/>
+		<img src="img/keeb/plate_rotation/frame00023.png"/>
+		<img src="img/keeb/plate_rotation/frame00024.png"/>
+		<img src="img/keeb/plate_rotation/frame00025.png"/>
+		<img src="img/keeb/plate_rotation/frame00026.png"/>
+		<img src="img/keeb/plate_rotation/frame00027.png"/>
+		<img src="img/keeb/plate_rotation/frame00028.png"/>
+		<img src="img/keeb/plate_rotation/frame00029.png"/>
+
+		<img src="img/keeb/base_rotation/frame00000.png"/>
+		<img src="img/keeb/base_rotation/frame00001.png"/>
+		<img src="img/keeb/base_rotation/frame00002.png"/>
+		<img src="img/keeb/base_rotation/frame00003.png"/>
+		<img src="img/keeb/base_rotation/frame00004.png"/>
+		<img src="img/keeb/base_rotation/frame00005.png"/>
+		<img src="img/keeb/base_rotation/frame00006.png"/>
+		<img src="img/keeb/base_rotation/frame00007.png"/>
+		<img src="img/keeb/base_rotation/frame00008.png"/>
+		<img src="img/keeb/base_rotation/frame00009.png"/>
+		<img src="img/keeb/base_rotation/frame00010.png"/>
+		<img src="img/keeb/base_rotation/frame00011.png"/>
+		<img src="img/keeb/base_rotation/frame00012.png"/>
+		<img src="img/keeb/base_rotation/frame00013.png"/>
+		<img src="img/keeb/base_rotation/frame00014.png"/>
+		<img src="img/keeb/base_rotation/frame00015.png"/>
+		<img src="img/keeb/base_rotation/frame00016.png"/>
+		<img src="img/keeb/base_rotation/frame00017.png"/>
+		<img src="img/keeb/base_rotation/frame00018.png"/>
+		<img src="img/keeb/base_rotation/frame00019.png"/>
+		<img src="img/keeb/base_rotation/frame00020.png"/>
+		<img src="img/keeb/base_rotation/frame00021.png"/>
+		<img src="img/keeb/base_rotation/frame00022.png"/>
+		<img src="img/keeb/base_rotation/frame00023.png"/>
+		<img src="img/keeb/base_rotation/frame00024.png"/>
+		<img src="img/keeb/base_rotation/frame00025.png"/>
+		<img src="img/keeb/base_rotation/frame00026.png"/>
+		<img src="img/keeb/base_rotation/frame00027.png"/>
+		<img src="img/keeb/base_rotation/frame00028.png"/>
+		<img src="img/keeb/base_rotation/frame00029.png"/>
 	</div>
+
 	<small>
 		<p style="text-align:left;">Tee raportti, jossa kerrot<br>
 		<ul>
@@ -965,7 +1081,36 @@ boltHoles = [
 </html>
 
 <script>
-	document.getElementById( "imagePreload" ).remove();
+	const imagePreload = document.getElementById( "imagePreload" );
+
+	// This didn't work, probably because the images only get loaded after the page is created
+	/*let images = [
+	"img/keeb/typewriter.jpg",
+	"img/keeb/typewriter_colored.jpg",
+	];
+	for ( let i=1; i<5; i++ )
+	{
+		images.push( `img/keeb/${i}.png` );
+	}
+	for ( let i=0; i<10; i++ )
+	{
+		images.push( `img/keeb/top_rotation/frame0000${i}.png` );
+		images.push( `img/keeb/plate_rotation/frame0000${i}.png` );
+		images.push( `img/keeb/base_rotation/frame0000${i}.png` );
+	}
+	for ( let i=10; i<30; i++ )
+	{
+		images.push( `img/keeb/top_rotation/frame000${i}.png` );
+		images.push( `img/keeb/plate_rotation/frame000${i}.png` );
+		images.push( `img/keeb/base_rotation/frame000${i}.png` );
+	}
+
+	for ( let i=0; i<images.length; i++ )
+	{
+		imagePreload.innerHTML += `<img src=${images[i]}/>`;
+	}*/
+
+	window.onload = imagePreload.remove();
 
 	const codeView = document.getElementById( "codeView" );
 

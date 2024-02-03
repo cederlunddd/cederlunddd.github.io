@@ -147,6 +147,59 @@ figure .typewriterImage
 	margin-right:auto;
 }
 
+#qwertyKeyboard
+{
+}
+.row
+{
+	display:flex;
+}
+.key
+{
+	font-family:monospace;
+	font-size:6mm;
+
+	display:inline-block;
+
+	width:18mm;
+	height:18mm;
+
+	max-width:calc( 100vw / 10 - 4mm );
+	max-height:calc( 100vw / 10 - 4mm );
+
+	outline:2px solid;
+	border-radius:2mm;
+
+	margin:1mm;
+
+	flex-shrink:0;
+}
+.legend
+{
+	font-size:min(1em, 4vw);
+	margin:10%;
+}
+.offset
+{
+	flex-shrink:0;
+	animation-name:animateOffset;
+	animation-duration:3s;
+	animation-iteration-count:infinite;
+	animation-timing-function:ease-in-out;
+	animation-direction:alternate;
+}
+@keyframes animateOffset
+{
+	0%
+	{
+		width:default;
+	}
+	100%
+	{
+		width:0mm;
+	}
+}
+
 .firstKeebImage
 {
 	width:700px;
@@ -173,7 +226,7 @@ figure .typewriterImage
 	width:700px;
 }
 
-figure .scadLayersImage
+.scadLayersImage
 {
 	animation-name:loopLayerImages, loadLayerImages;
 	animation-duration:4s, 0.1s;
@@ -266,6 +319,22 @@ figure .scadLayersImage
 {
 	width:800px;
 }
+
+.originalBaseImage
+{
+	width:700px;
+}
+
+.firstAssemblyImage
+{
+	width:700px;
+}
+
+.wiringImage
+{
+	width:700px;
+}
+
 
 .sandwichSlider
 {
@@ -734,56 +803,3 @@ figure .baseSpinImage
 	}
 }
 
-
-#qwertyKeyboard
-{
-}
-.row
-{
-	display:flex;
-}
-.key
-{
-	font-family:monospace;
-	font-size:6mm;
-
-	display:inline-block;
-
-	width:18mm;
-	height:18mm;
-
-	max-width:calc( 100vw / 10 - 4mm );
-	max-height:calc( 100vw / 10 - 4mm );
-
-	outline:2px solid;
-	border-radius:2mm;
-
-	margin:1mm;
-
-	flex-shrink:0;
-}
-.legend
-{
-	font-size:min(1em, 4vw);
-	margin:10%;
-}
-.offset
-{
-	flex-shrink:0;
-	animation-name:animateOffset;
-	animation-duration:3s;
-	animation-iteration-count:infinite;
-	animation-timing-function:ease-in-out;
-	animation-direction:alternate;
-}
-@keyframes animateOffset
-{
-	0%
-	{
-		width:default;
-	}
-	100%
-	{
-		width:0mm;
-	}
-}
