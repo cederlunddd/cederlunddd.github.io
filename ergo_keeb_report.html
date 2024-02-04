@@ -7,8 +7,7 @@
 </head>
 
 
-<body>
-<main>
+<body><main>
 	<header class="banner">
 		<h1 class="bannerTitle">Ergonominen <br><i>columnar stagger</i> <br>näppäimistö</h1>
 	</header>
@@ -24,6 +23,8 @@
 		</ul>
 		<a href="#Project"><li>Projekti</li></a>
 		<ul>
+			<a href="#Case"><li>Kotelo</li></a>
+			<a href="#Keycaps"><li>Näppäimet</li></a>
 			<a href="#Parts"><li>Osien 3D-mallit</li></a>
 		</ul>
 		<a href="#Post_mortem"><li>Post mortem</li></a>
@@ -94,7 +95,7 @@
 
 	<p>Ennen kyseistä projektia olin tottunut käyttämään kaikkiin CAD-tarpeisiini FreeCAD -ohjelmistoa. FreeCAD'issa on kuitenkin useita ongelmia käyttöliittymään liittyen, sekä <i>undo</i> ja <i>redo</i> -komentojen kanssa, joka joskus johtaa ohjelmiston kaatumiseen. Olin jonkin aikaa suunnitellut kokeilla OpenSCAD -ohjelmistoa sen muokkaamisen käyttöliittymättömyyden vuoksi, sekä siksi, että se on täydellisemmin parametrinen kuin FreeCAD.</p>
 
-	<p>Käyttöliittymän sijaan, OpenSCAD'issa 3D mallit luodaan kirjoittamalla OpenSCAD'in omaa koodikieltä <code>.scad</code> tiedostoihin. Kyseisiä 3D malleja pystyy esikatselemaan OpenSCAD'in ohjelmistolla. Näin syntyy OpenSCAD'in käyttökokemus, koodia kirjoitetaan tiedostoon ja sen tallentaessa 3D malli päivittyy ohjelmiston 3D-näkymään automaattisesti jos se on auki, jolloin näkee tekemänsä muutokset. Verrattuna FreeCAD'iin, OpenSCAD on hyvin suoritustehoinen, sillä laskutoimitukset koodissa ovat usein yksinkertaisempia kuin FreeCAD'in restriction-perusteiset laskut. Tämä kuitenkin tarkoittaa myös, että OpenSCAD soveltuu parhaiten yksinkertaisemman geometrian luomiseen.</p>
+	<p>Käyttöliittymän sijaan, OpenSCAD'issa 3D mallit luodaan kirjoittamalla OpenSCAD'in omaa koodikieltä <code>.scad</code> tiedostoihin. Kyseisiä 3D malleja pystyy esikatselemaan OpenSCAD'in ohjelmistolla. Näin syntyy OpenSCAD'in käyttökokemus, koodia kirjoitetaan tiedostoon ja sen tallentaessa 3D malli päivittyy ohjelmiston 3D-näkymään automaattisesti jos se on auki, jolloin näkee tekemänsä muutokset. Verrattuna FreeCAD'iin, OpenSCAD on yleensä hyvin suoritustehoinen, sillä laskutoimitukset koodissa ovat usein yksinkertaisempia kuin FreeCAD'in restriction-perusteiset laskut. Tämä kuitenkin tarkoittaa myös, että OpenSCAD soveltuu parhaiten yksinkertaisemman geometrian luomiseen.</p>
 
 	<figure>
 	<pre id="codeView" class="codeView"><code id="code">// Fragment number 
@@ -837,6 +838,8 @@ boltHoles = [
 
 	<a href="#Project" class="chapterLink"><h1 id="Project">Projekti</h1></a>
 
+	<a href="#Case" class="chapterLink"><h2 id="Case">Kotelo</h2></a>
+
 	<p>Koska suunnittelin näppäimistön käytettäväksi pääasiassa kannettavan tietokoneeni kanssa, niin aloitin projektin mittaamalla sen alaosan, sisältäen näppäimistön ja kosketuslevyn, jotta voisin luoda siitä viitemallin. Halusin että asettamani kumijalat näppäimistössä menisivät kannettavan näppäimistön väleihin, joka vähetäisi sen liikkumista, ja että kannettavan kosketuslevyä voisi käyttää uuden näppäimistön ollessa kannettavan päällä.</p>
 
 	<figure class="macbookModelImage" >
@@ -868,11 +871,21 @@ boltHoles = [
 		<figcaption>Ensimmäinen kytkinlevy. Lopullisen levyn lähdekoodi löytyy kohdasta <code>// Outemu columnar plate</code></figcaption>
 	</figure>
 
+	<figure class="plateAssemblyImage">
+		<img src="img/keeb/plate_assembly/1.png" class="plateAssemblyImage" alt=""/>
+		<figcaption>Levyn mallinnuksen vaiheet.</figcaption>
+	</figure>
+
 	<p>Levyn jälkeen suunnittelin ja tulostin pohja osan koteloon, mutta jouduin kuitenkin tulostamaan levyn useampaan kertaan aluksi tietämättömän tulostin ongelman vuoksi. Tulostamani pohja ja kotelo eivät jostain syystä sopineet yhteen. Syy tähän olis se, että tulostimeni oli kokonaan vino Y-akselin suuntaan, eli X-akselin liike vaikutti myös Y-akselin suunnalla, jolloin kun käänsin levyn ympäri, se ei enää ollut yhteensopiva pohjan kanssa, vaikka molemmat osat ovat symmetrisiä. Kun vihdoin tajusin tämän niin minun piti hyväksyä etten voi piilottaa tulostuksen kuviota ja näyttää tulostuksen lasi-kiillotteista pintaa. Tulostin täten levyn vielä kerran uudestaan, mutta kiinnostavan näköisellä kuvioinnilla. Tulostimen uudelleen kokoaminen sai jäädä myöhemmäksi.</p>
 
 	<figure class="patternImage">
 		<img src="img/keeb/pattern.jpg" class="patternImage" alt=""/>
 		<figcaption>Valitsemani infill-kuvio loi mukavan satunnaisen tekstuurin.</figcaption>
+	</figure>
+
+	<figure class="baseAssemblyImage">
+		<img src="img/keeb/base_assembly/1.png" class="baseAssemblyImage" alt=""/>
+		<figcaption>Pohjan mallinnuksen vaiheet.</figcaption>
 	</figure>
 
 	<p>Alunperin en ollut huomioinut koteloon sitä, kuinka paljon tilaa pulttien mutterit veisivät pohjassa. Tämän takia kytkinlevy oli hieman pienempi pinta-alaltaan kuin mitä kotelon pitäisi olla, jotta mutterit jäisivät piiloon. Täten päätin lisätä pohjaan pienen jalkatason, johon mutterit jäisivät piiloon. Pohjan kuopat muttereille olivat kuitenkin liian pieniä, ja en saanut niitä paikalle edes kolvilla kuumentamalla. Tämän vuoksi nostin pohjan pinta-alaa vielä lisää, jota mutterit mahtuisivat paremmin. Lisäksi muutin pohjan reunuksen olemaan kalteva, koska en pitänyt siitä miltä laajennettu jalka näytti.</p>
@@ -887,11 +900,38 @@ boltHoles = [
 		<figcaption>Uusi kaltevareunainen pohja ja valmis päällinen kytkinten ja vanhan näppäimistön näppäinten kanssa.</figcaption>
 	</figure>
 
-	<p>Päällisen mallintaminen oli haastavin osa projektia. Vaikka minulla oli hieman ongelmia boolean-operaatioiden kanssa pohjan mallintamisessa, ne olivat helpompia korjata kuin mitä päällisen kanssa tuli vastaan. Päällisen mallintamisen olisi pitänyt olla helppoa; laajentaa levyn ulkoreunan mallia ylöspäin ja luo aukot näppäinten paikkojen perusteella. Ongelmana kuitenkin oli, että kun loin jokaisen näppäimen perusteella uuden boolean operaation, niiden sisikkyys toistensa kanssa loi ongelmia peräkkäisten, yhdistettyjen ja peilattujen boolean-operaatioiden kanssa kun loin boolean-operaation jokaisen näppäimen kohdalla. Jouduin luomaan yhtenäisen uuden muodon, jolla suorittaa yksittäinen boolean-operaatio, jonka tuloksen vasta putsasin ja peilasin luodakseni symmetrisen muodon, jotta selvisin päällisestä.</p>
+	<p>Alunperin en suunnitellut luovani korotettua päällisreunusta näppäimistöön, mutta kun en jaksanut sahata pultteja lyhyemmiksi kuten alunperin suunnittelin, niin päädyin sen luomiseen väliratkaisuna. Kytkien piilottaminen sattui myös näyttämään paremmalta niiden sopimattomien värien vuoksi.</p>
+
+	<p>Päällisen mallintaminen oli haastavin osa projektia. Vaikka minulla oli hieman ongelmia boolean-operaatioiden kanssa pohjan mallintamisessa, ne olivat helpompia korjata kuin mitä päällisen kanssa tuli vastaan. Päällisen mallintamisen olisi pitänyt olla helppoa; laajentaa levyn ulkoreunan mallia ylöspäin ja luo aukot näppäinten paikkojen perusteella. Ongelmana kuitenkin oli, että kun loin jokaisen näppäimen perusteella uuden boolean operaation, niiden sisikkyys toistensa kanssa loi ongelmia peräkkäisten, yhdistettyjen ja peilattujen boolean-operaatioiden kanssa kun loin boolean-operaation jokaisen näppäimen kohdalla. Jouduin luomaan erillisen yhtenäisen uuden muodon, jolla suorittaa yksittäinen boolean-operaatio, jonka tuloksen vasta putsasin ja peilasin luodakseni symmetrisen muodon, jotta selvisin päällisestä.</p>
+
+	<figure class="topAssemblyImage">
+		<img src="img/keeb/top_assembly/1.png" class="topAssemblyImage" alt=""/>
+		<figcaption>Päällisen mallinnuksen vaiheet.</figcaption>
+	</figure>
 
 	<figure class="wiringImage">
 		<img src="img/keeb/wiring.jpg" class="wiringImage" alt=""/>
 		<figcaption>Näppäimistön onneksi piiloon jäävä johdotus.</figcaption>
+	</figure>
+
+	<p>Vaikka näppäimistön kotelo ja elektroniikka olivat nyt valmiita, niin en kuitenkaan ollut valmis projektin kanssa. Viimeisessä näppäimistössä käyttämäni ja tähän näppäimistöön väliaikaisesti asentamani näppäimet olivat XDA-mallisia näppäimiä, joista pidin, mutta kun mittasin ne niin huomasin että ne olivat tarpeettoman korkeaksi suunniteltuja. Aloin täten suunnittelemaan omia näppäimiä.</p>
+
+	<a href="#Keycaps" class="chapterLink"><h2 id="Keycaps">Näppäimet</h2></a>
+
+	<p>Luomalla omat näppäimet pystyisin alentamaan niiden korkeutta, jolloin käteni voisivat olla vähemmän epämukavan korkealla kirjoittaessa, mutta pystyisin myös lisäämään näppäimiin pienen kaartevuuden testatakseni pitäisinkö siitä ominaisuutena. Minulla ei myöskään ollut valmiiksi näppäimiä joissa olisi minkäänlaista kohotusta tunnistamaan ne kotinäppäinten kohdalla, ja halusin myös kohotukset peukalonäppäimille.</p>
+
+	<figure class="keycapsImage">
+		<img src="img/keeb/keycaps/1.png" class="keycapsImage" alt=""/>
+		<figcaption>Sormien ja peukalon näppäimet.</figcaption>
+	</figure>
+
+	<p>Olin kerran aikaisemmin yrittänyt tulostaa omia näppäimiäni, kuten näkee prototyyppi kuvissa. Näppäinten tulostamisessa vaikeaa kuitenkin on tulostussuunta ja näppäimen kytkimeen yhdistyvä varsi. Jos näppäimen tulostaa maaten, niin varren laatu on hyvä, mutta näppäimen päällispinta on huono, ellei nosta tulostustarkkuutta suuresti tai tyydy litteään näppäimeen. Ennenkin kun koitin tulostaa omia näppäimiä, niin tulostin ne 45 asteen kulmassa (1,1,0)-akselilla käännettynä, joka antoi hyvän pinnan näppäimelle, mutta varren tulostaminen oli haastavaa.</p>
+
+	<p>Nyt uudella yrityksellä yritin yhdistää eri tulostussuuntien parhaat osat tulostamalla näppäimen kahdessa osassa: näppäimen hattu ja varsi erikseen. Näin näppäimen hatun pinta olisi laadukas, ja varsi tulostuisi hyvin tarkasti, mahtuen jopa pyöreä aukkoiseen Gateron low profile-kytkimeen. Tulostuksen jälkeen laitoin pienen määrän kuumaliimaa varren jalkaan, ja painoin näppäimen yhteen. Lopputulos on ollut yllättävän hyvä käytössä, eikä yksikään näppäin ole kulunut rikki.</p>
+
+	<figure class="customKeycapsImage">
+		<img src="img/keeb/custom_keycap_real.jpg" class="customKeycapsImage" alt=""/>
+		<figcaption>Tulostetut suunnittelemani kaksiosaiset näppäimet.</figcaption>
 	</figure>
 
 	<a href="#Parts" class="chapterLink"><h2 id="Parts">Osien 3D-mallit</h2></a>
@@ -1061,6 +1101,40 @@ boltHoles = [
 		<img src="img/keeb/base_rotation/frame00027.png"/>
 		<img src="img/keeb/base_rotation/frame00028.png"/>
 		<img src="img/keeb/base_rotation/frame00029.png"/>
+
+		<img src="img/keeb/top_assembly/1.png"/>
+		<img src="img/keeb/top_assembly/2.png"/>
+		<img src="img/keeb/top_assembly/3.png"/>
+		<img src="img/keeb/top_assembly/4.png"/>
+		<img src="img/keeb/top_assembly/5.png"/>
+		<img src="img/keeb/top_assembly/6.png"/>
+		<img src="img/keeb/top_assembly/7.png"/>
+
+		<img src="img/keeb/plate_assembly/1.png"/>
+		<img src="img/keeb/plate_assembly/2.png"/>
+		<img src="img/keeb/plate_assembly/3.png"/>
+		<img src="img/keeb/plate_assembly/4.png"/>
+		<img src="img/keeb/plate_assembly/5.png"/>
+		<img src="img/keeb/plate_assembly/6.png"/>
+
+		<img src="img/keeb/base_assembly/1.png"/>
+		<img src="img/keeb/base_assembly/2.png"/>
+		<img src="img/keeb/base_assembly/3.png"/>
+		<img src="img/keeb/base_assembly/4.png"/>
+		<img src="img/keeb/base_assembly/5.png"/>
+		<img src="img/keeb/base_assembly/6.png"/>
+		<img src="img/keeb/base_assembly/7.png"/>
+		<img src="img/keeb/base_assembly/8.png"/>
+		<img src="img/keeb/base_assembly/9.png"/>
+		<img src="img/keeb/base_assembly/10.png"/>
+		<img src="img/keeb/base_assembly/11.png"/>
+		<img src="img/keeb/base_assembly/12.png"/>
+		<img src="img/keeb/base_assembly/13.png"/>
+		<img src="img/keeb/base_assembly/14.png"/>
+		<img src="img/keeb/base_assembly/15.png"/>
+
+		<img src="img/keeb/keycaps/1.png"/>
+		<img src="img/keeb/keycaps/2.png"/>
 	</div>
 
 	<small>
@@ -1075,8 +1149,7 @@ boltHoles = [
 		Fokus siinä, että myyt osaamistasi yrityksille<br>
 			t. Maria</p>
 	</small>
-</main>
-</body>
+</main></body>
 
 </html>
 
@@ -1113,6 +1186,83 @@ boltHoles = [
 	window.onload = imagePreload.remove();
 
 	const codeView = document.getElementById( "codeView" );
+
+	const sourceCode = codeView.children[0].innerHTML.split( "\n" );
+
+	let styledCode = "";
+
+	for ( let lineNumber=0; lineNumber<sourceCode.length; lineNumber++ )
+	{
+		let line = sourceCode[lineNumber];
+		// Comments
+		/*let commentBlockStartIndex = line.search( /[/][*]/ )
+		let commentBlockEndIndex = line.search( /[*][/]/ )
+		let commentIndex = line.search( /[/]{2}/ )*/
+
+		/*if ( commentIndex != -1 )
+		{
+			styledCode += line.substring( 0, commentIndex ) + "<span class=codeComment>" + line.substring( commentIndex ) + "</span>";
+		}
+		else if ( commentBlockEndIndex != -1 )
+		{
+			styledCode += line.substring( 0, commentBlockEndIndex+2 ) + "</span>" + line.substring( commentBlockEndIndex+2 );
+		}
+		else if ( commentBlockStartIndex != -1 )
+		{
+			styledCode += line.substring( 0, commentBlockStartIndex ) + "<span class=codeComment>" + line.substring( commentBlockStartIndex );
+		}
+		else
+		{
+			styledCode += line;
+		}*/
+
+		console.log(line);
+
+		const e = {
+			commentLine:["<span class=\"codeComment\">", "</span>"],
+			blockStart:["<span class=\"codeComment\">", ""],
+			blockEnd:["", "</span>"],
+		};
+
+		let elements = [];
+
+		let commentLine = line.search( /[/]{2}/ )
+		if ( commentLine != -1 )
+		{
+			elements.push( [commentLine, line.length, e.commentLine] );
+		}
+
+		let commentBlockStart = line.search( /[/][*]/ )
+		if ( commentBlockStart != -1 )
+		{
+			elements.push( [commentBlockStart, commentBlockStart, e.blockStart] );
+		}
+
+		let commentBlockEnd = line.search( /[*][/]/ )
+		if ( commentBlockEnd != -1 )
+		{
+			elements.push( [commentBlockEnd+2, commentBlockEnd+2, e.blockEnd] );
+		}
+
+		elements = elements.sort( function( a, b )
+		{
+			return b[0] - a[0];
+		})
+
+		let styledLine = line;
+		for ( let i=0; i<elements.length; i++ )
+		{
+			styledLine = styledLine.substring( 0, elements[i][0] )
+					+ elements[i][2][0]
+					+ styledLine.substring( elements[i][0], elements[i][1] )
+					+ elements[i][2][1]
+					+ styledLine.substring( elements[i][1] );
+		}
+
+		styledCode += styledLine + "\n";
+	}
+
+	codeView.children[0].innerHTML = styledCode;
 
 	let scroll = true;
 
