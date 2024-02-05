@@ -1216,32 +1216,54 @@ boltHoles = [
 			styledCode += line;
 		}*/
 
-		console.log(line);
+		//console.log(line);
 
 		const e = {
-			commentLine:["<span class=\"codeComment\">", "</span>"],
-			blockStart:["<span class=\"codeComment\">", ""],
-			blockEnd:["", "</span>"],
+			commentLine:["<code class=\"codeComment\">", "</code>"],
+			blockStart:["<code class=\"codeComment block\">", ""],
+			blockEnd:["", "</code>"],
+			number:["<span class=\"codeNumber\">", "</span>"],
 		};
 
 		let elements = [];
 
-		let commentLine = line.search( /[/]{2}/ )
-		if ( commentLine != -1 )
+		let index = 0;
+		let matches = [];
+
+		index = line.search( /[/]{2}/ );
+		if ( index != -1 )
 		{
-			elements.push( [commentLine, line.length, e.commentLine] );
+			elements.push( [index, line.length, e.commentLine] );
 		}
 
-		let commentBlockStart = line.search( /[/][*]/ )
-		if ( commentBlockStart != -1 )
+		index = line.search( /[^/]{2}[/][*]/ );
+		if ( index != -1 )
 		{
-			elements.push( [commentBlockStart, commentBlockStart, e.blockStart] );
+			elements.push( [index, index, e.blockStart] );
 		}
 
-		let commentBlockEnd = line.search( /[*][/]/ )
-		if ( commentBlockEnd != -1 )
+		index = line.search( /[^/]{2}[*][/]/ );
+		if ( index != -1 )
 		{
-			elements.push( [commentBlockEnd+2, commentBlockEnd+2, e.blockEnd] );
+			elements.push( [index+4, index+4, e.blockEnd] );
+		}
+
+		/*index = line.search( /[0-9]+/ );
+		if ( index != -1 )
+		{
+			elements.push( [index, index+line.match( /[0-9]+/ )[0].length, e.number] );
+		}*/
+		matches = line.match( /[0-9]*?[.]?[0-9]*/g );
+		if ( matches )
+		{
+			for ( let i=0; i<matches.length; i++ )
+			{
+				index = line.indexOf( matches[i] );
+				if ( index != -1 )
+				{
+					elements.push( [index, index+matches[i].length, e.number] );
+				}
+			}
 		}
 
 		elements = elements.sort( function( a, b )
@@ -1252,11 +1274,15 @@ boltHoles = [
 		let styledLine = line;
 		for ( let i=0; i<elements.length; i++ )
 		{
+			//let start = elements[i][0];
+			//let end = elements[i][1];
+
 			styledLine = styledLine.substring( 0, elements[i][0] )
 					+ elements[i][2][0]
 					+ styledLine.substring( elements[i][0], elements[i][1] )
 					+ elements[i][2][1]
 					+ styledLine.substring( elements[i][1] );
+			console.log(styledLine);
 		}
 
 		styledCode += styledLine + "\n";
