@@ -37,6 +37,7 @@ img, figure
 p
 {
 	max-width:50em;
+	font-size:1em;
 	text-align:justify;
 }
 
@@ -297,13 +298,33 @@ figure .typewriterImage
 .codeView code
 {
 }
-.codeComment
+.codeComment,
+.codeComment .codeNumber,
+.codeComment .codeBuiltin,
+.codeComment .codeString,
+.codeComment .codeBracket
 {
 	color:#999;
 }
 .codeNumber
 {
 	color:#99f;
+}
+.codeBracket
+{
+	color:#d9f;
+}
+.codeBuiltin
+{
+	color:#88f;
+}
+.codeString,
+.codeString .codeNumber,
+.codeString .codeBuiltin,
+.codeString .codeString,
+.codeString .codeBracket
+{
+	color:#f88;
 }
 
 .prusaslicerImage
