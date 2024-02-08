@@ -52,6 +52,8 @@ a:hover
 
 figcaption
 {
+	margin-left:0.1em;
+	margin-right:0.1em;
 	color:#555;
 	font-size:0.95rem;
 }
@@ -65,6 +67,7 @@ figcaption
 .contents
 {
 	padding:0;
+	width:10em;
 
 	margin-bottom:10em;
 }
@@ -116,6 +119,8 @@ figcaption
 	margin-left:0;
 	margin-right:0;
 }
+
+/* Reasons */
 
 .typewriterImage
 {
@@ -332,6 +337,10 @@ figure .typewriterImage
 	width:700px;
 }
 
+/* Project */
+
+/* Case */
+
 .macbookModelImage
 {
 	width:600px;
@@ -512,6 +521,8 @@ figure .baseAssemblyImage
 	}
 }
 
+/* Keycaps */
+
 figure .keycapsImage
 {
 	animation-name:keycaps;
@@ -536,6 +547,12 @@ figure .keycapsImage
 	width:600px;
 }
 
+.finishedImage
+{
+	width:800px;
+}
+
+/* 3D models */
 
 .sandwichSlider
 {
@@ -1004,3 +1021,17 @@ figure .baseSpinImage
 	}
 }
 
+/* Post mortem */
+
+.keyCoverImage
+{}
+
+.shadowlineImage
+{
+	width:calc(20*14px);
+	image-rendering:pixelated;
+}
+.shadowlineImage img
+{
+	min-width:14px;
+}
